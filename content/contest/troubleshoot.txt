@@ -1,4 +1,5 @@
 Pre-submit:
+Make sure to check small corner cases (n = 1, m = 0).
 Write a few simple test cases if sample is not enough.
 Are time limits close? If so, generate max cases.
 Is the memory usage fine?

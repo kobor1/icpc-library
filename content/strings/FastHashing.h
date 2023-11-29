@@ -27,7 +27,7 @@ static const H C = (ll)1e11+3; // (order ~ 3e9; random also ok)
 
 struct Hasher {
 	vector<H> ha, pw;
-	HashInterval(string &str) : ha(sz(str)+1), pw(ha) {
+	Hasher(string &str) : ha(sz(str)+1), pw(ha) {
 		pw[0] = 1;
 		FOR(i,0,sz(str)) {
 			ha[i+1] = ha[i] * C + str[i];

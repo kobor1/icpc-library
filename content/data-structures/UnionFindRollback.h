@@ -18,8 +18,7 @@ struct RollbackUF {
 	int find(int x) { return e[x] < 0 ? x : find(e[x]); }
 	int time() { return sz(sta); }
 	void rollback(int t) {
-		for (int i = time(); i --> t;)
-			e[sta[i].st] = sta[i].nd;
+		for (int i = time(); i --> t;) e[sta[i].st] = sta[i].nd;
 		sta.resize(t);
 	}
 	bool join(int a, int b) {

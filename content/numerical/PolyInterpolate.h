@@ -10,8 +10,9 @@
  */
 #pragma once
 
-vector<double> interpolate(vd x, vd y, int n) {
-	vector<double> res(n), temp(n);
+using vd = vector<double>;
+vd interpolate(vd x, vd y, int n) {
+	vd res(n), temp(n);
 	FOR(k,0,n-1) FOR(i,k+1,n)
 		y[i] = (y[i] - y[k]) / (x[i] - x[k]);
 	double last = 0; temp[0] = 1;

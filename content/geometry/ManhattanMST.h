@@ -13,12 +13,12 @@
 #pragma once
 #include "Point.h"
 
-typedef Point<int> P;
+using P = Point<int>;
 vector<array<int, 3>> manhattanMST(vector<P> ps) {
 	vi id(sz(ps));
 	iota(all(id), 0);
 	vector<array<int, 3>> edges;
-	rep(k,0,4) {
+	FOR(k,0,4) {
 		sort(all(id), [&](int i, int j) {
 		     return (ps[i]-ps[j]).x < (ps[j]-ps[i]).y;});
 		map<int, int> sweep;
@@ -28,7 +28,7 @@ vector<array<int, 3>> manhattanMST(vector<P> ps) {
 				int j = it->second;
 				P d = ps[i] - ps[j];
 				if (d.y > d.x) break;
-				edges.push_back({d.y + d.x, i, j});
+				edges.pb({d.y + d.x, i, j});
 			}
 			sweep[-ps[i].y] = i;
 		}

@@ -14,6 +14,8 @@
  */
 #pragma once
 
+const ll mod = 5; /** exclude-line */
+
 using Poly = vector<ll>;
 ll linearRec(Poly S, Poly tr, ll k) {
 	int n = sz(tr);

@@ -3,8 +3,8 @@
 using namespace std;
 
 #define FOR(i, b, e) for(int i = (b); i < (e); i++)
-#define sz(x) ((int)size(x))
-#define all(x) begin(x), end(x)
+#define sz(x) int(x.size())
+#define all(x) x.begin(), x.end()
 #define pb push_back
 #define mp make_pair
 #define mt make_tuple
