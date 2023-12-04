@@ -18,7 +18,7 @@ struct DP { // Modify at will:
 		if (L >= R) return;
 		int mid = (L + R) >> 1;
 		pair<ll, int> best(LLONG_MAX, LO);
-		rep(k, max(LO,lo(mid)), min(HI,hi(mid)))
+		FOR(k, max(LO,lo(mid)), min(HI,hi(mid)))
 			best = min(best, make_pair(f(mid, k), k));
 		store(mid, best.second, best.first);
 		rec(L, mid, LO, best.second+1);

@@ -40,8 +40,7 @@ template <class P>
 array<int, 2> lineHull(P a, P b, vector<P>& poly) {
 	int endA = extrVertex(poly, (a - b).perp());
 	int endB = extrVertex(poly, (b - a).perp());
-	if (cmpL(endA) < 0 || cmpL(endB) > 0)
-		return {-1, -1};
+	if (cmpL(endA) < 0 || cmpL(endB) > 0) return {-1, -1};
 	array<int, 2> res;
 	FOR(i,0,2) {
 		int lo = endB, hi = endA, n = sz(poly);
@@ -53,10 +52,11 @@ array<int, 2> lineHull(P a, P b, vector<P>& poly) {
 		swap(endA, endB);
 	}
 	if (res[0] == res[1]) return {res[0], -1};
-	if (!cmpL(res[0]) && !cmpL(res[1]))
+	if (!cmpL(res[0]) && !cmpL(res[1])) {
 		switch ((res[0] - res[1] + sz(poly) + 1) % sz(poly)) {
 			case 0: return {res[0], res[0]};
 			case 2: return {res[1], res[1]};
 		}
+	}
 	return res;
 }
