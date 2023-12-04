@@ -11,8 +11,8 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 
 Data structures
 * Persistent Segment Tree
-* Persistent treap
-* Li-Chao tree
+* Persistent Treap
+* Extended Li-Chao tree
 
 Geometry
 * Add dynamic convex hull
@@ -21,7 +21,7 @@ Geometry
 * Add all segments intersections
 
 Graph
-* Add general matching (blossom? / turbo? / weighted? / weighted turbo?)
+* Add general matching (blossom)
 * Add 2SAT operators
 * Review EdgeColoring and add EdgeColoring for Bipartites
 * Review HLD
@@ -31,7 +31,6 @@ Graph
 * Add centroid tree
 * Add TopTree
 * Add tree hashes
-* Investigate Yarin-sieve
 
 Number theory
 * Add mobius inverse algo
@@ -43,9 +42,7 @@ Number theory
 Numerical
 * Add faster linear recurrence
 * Add transforms on different bits
-* Add gcd convolution
-* Add polynomial division, inversion, modulo, gcd
-* Add generating function + formal power series
+* Add polynomial operations (division, inversion, modulo, gcd)
 
 Strings
 * Review SuffixArray (add fast one?)
@@ -62,6 +59,7 @@ Strings
 Various
 * Add Josephus problem solver
 * Review DivideAndConquerDP
+* Investigate Yarin-sieve
 
 ## Aspirations
 
