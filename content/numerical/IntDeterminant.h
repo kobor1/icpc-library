@@ -11,7 +11,7 @@
 
 const ll mod = 12345;
 ll det(vector<vector<ll>>& a) {
-	int n = sz(a); ll ans = 1;
+	int n = SZ(a); ll ans = 1;
 	FOR(i,0,n) {
 		FOR(j,i+1,n) {
 			while (a[j][i] != 0) { // gcd step

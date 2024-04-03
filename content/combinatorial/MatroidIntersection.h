@@ -4,7 +4,7 @@
  * License: CC0
  * Source: https://github.com/bqi343/cp-notebook/blob/master/Implementations/content/combinatorial%20(11.2)/MatroidIsect.h
  * Description: Computes a set of maximum size which is independent in both matroids.
- * Time: O(GI^{1.5}) calls to oracles
+ * Time: O(GI^{3/2}) calls to oracles
  * Status: tested
  */
 #pragma once
@@ -13,7 +13,7 @@ template<class M1, class M2> struct MatroidIsect {
 	int n; vi iset; M1 m1; M2 m2;
 	bool augment() {
 		vi pre(n + 1, -1); queue<int> q({n});
-		while(sz(q)) {
+		while(SZ(q)) {
 			int x = q.front(); q.pop();
 			if(iset[x]) {
 				m1.clear();

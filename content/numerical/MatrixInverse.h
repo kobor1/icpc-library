@@ -11,7 +11,7 @@
 #pragma once
 
 int matInv(vector<vector<double>>& A) {
-	int n = sz(A); vi col(n);
+	int n = SZ(A); vi col(n);
 	vector<vector<double>> tmp(n, vector<double>(n));
 	FOR(i,0,n) tmp[i][i] = 1, col[i] = i;
 

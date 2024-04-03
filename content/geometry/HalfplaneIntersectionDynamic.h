@@ -16,20 +16,14 @@
 using P = Point<double>;
 int half(P a) { return a.y < 0 || (a.y == 0 && a.x < 0); }
 
-// struct polarCmp {	// C++17 style
-// 	bool operator()(const P &a, const P &b) const {
-// 		if(half(a) == half(b)) return a.cross(b) > 0;
-// 		return half(a) < half(b);
-// 	}
-// };
-// struct HalfplaneSet : map<P, P, polarCmp> {
-
-auto polarCmp = [](P a, P b) {	// C++20 style
-	if(half(a) == half(b)) return a.cross(b) > 0;
-	return half(a) < half(b);
+struct polarCmp {
+	bool operator()(const P &a, const P &b) const {
+		if(half(a) == half(b)) return a.cross(b) > 0;
+		return half(a) < half(b);
+	}
 };
 
-struct HalfplaneSet : map<P, P, decltype(polarCmp)> {
+struct HalfplaneSet : map<P, P, polarCmp> {
 	double INF = 1e6, area = 8 * INF * INF;	// two times area
 
 	HalfplaneSet() {

@@ -36,7 +36,7 @@ the algorithm is numerically stable and neither \texttt{tr} nor the check for \t
 using T = double;
 vector<T> tridiagonal(vector<T> diag, const vector<T>& super,
 		const vector<T>& sub, vector<T> b) {
-	int n = sz(b); vi tr(n);
+	int n = SZ(b); vi tr(n);
 	FOR(i,0,n-1) {
 		if (abs(diag[i]) < 1e-9 * abs(super[i])) { // diag[i] == 0
 			b[i+1] -= b[i] * diag[i+1] / super[i];

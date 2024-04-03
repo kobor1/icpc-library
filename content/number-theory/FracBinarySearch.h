@@ -28,8 +28,7 @@ Frac fracBS(F f, ll N) {
 				adv -= step; si = 2;
 			}
 		}
-		hi.p += lo.p * adv;
-		hi.q += lo.q * adv;
+		hi.p += lo.p * adv; hi.q += lo.q * adv;
 		dir = !dir;
 		swap(lo, hi);
 		A = B; B = !!adv;

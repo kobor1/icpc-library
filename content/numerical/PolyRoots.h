@@ -11,15 +11,13 @@
 #include "Polynomial.h"
 
 vector<double> polyRoots(Poly p, double xmin, double xmax) {
-	if (sz(p.a) == 2) { return {-p.a[0]/p.a[1]}; }
+	if (SZ(p.a) == 2) { return {-p.a[0]/p.a[1]}; }
 	vector<double> ret;
-	Poly der = p;
-	der.diff();
+	Poly der = p; der.diff();
 	auto dr = polyRoots(der, xmin, xmax);
-	dr.pb(xmin-1);
-	dr.pb(xmax+1);
+	dr.pb(xmin-1); dr.pb(xmax+1);
 	sort(all(dr));
-	FOR(i,0,sz(dr)-1) {
+	FOR(i,0,SZ(dr)-1) {
 		double l = dr[i], h = dr[i+1];
 		bool sign = p(l) > 0;
 		if (sign ^ (p(h) > 0)) {

@@ -22,9 +22,9 @@ Points on the edge of the hull between two other points are not considered part 
 
 using P = Point<ll>;
 vector<P> convexHull(vector<P> pts) {
-	if (sz(pts) <= 1) return pts;
+	if (SZ(pts) <= 1) return pts;
 	sort(all(pts));
-	vector<P> h(sz(pts)+1);
+	vector<P> h(SZ(pts)+1);
 	int s = 0, t = 0;
 	for (int it = 2; it--; s = --t, reverse(all(pts)))
 		for (P p : pts) {

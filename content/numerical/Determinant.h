@@ -10,7 +10,7 @@
 #pragma once
 
 double det(vector<vector<double>>& a) {
-	int n = sz(a); double res = 1;
+	int n = SZ(a); double res = 1;
 	FOR(i,0,n) {
 		int b = i;
 		FOR(j,i+1,n) if (fabs(a[j][i]) > fabs(a[b][i])) b = j;

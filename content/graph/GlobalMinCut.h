@@ -11,7 +11,7 @@
 
 pair<int, vi> globalMinCut(vector<vi> mat) {
 	pair<int, vi> best = {INT_MAX, {}};
-	int n = sz(mat);
+	int n = SZ(mat);
 	vector<vi> co(n);
 	FOR(i,0,n) co[i] = {i};
 	FOR(ph,1,n) {

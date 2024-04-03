@@ -17,7 +17,7 @@ int calc() { ... } // compute current answer
 
 vi mo(vector<pii> Q) {
 	int L = 0, R = 0, blk = 350; // ~N/sqrt(Q)
-	vi s(sz(Q)), res = s;
+	vi s(SZ(Q)), res = s;
 #define K(x) pii(x.first/blk, x.second ^ -(x.first/blk & 1))
 	iota(all(s), 0);
 	sort(all(s), [&](int s, int t){ return K(Q[s]) < K(Q[t]); });
@@ -33,8 +33,8 @@ vi mo(vector<pii> Q) {
 }
 
 vi moTree(vector<array<int, 2>> Q, vector<vi>& ed, int root=0){
-	int N = sz(ed), pos[2] = {}, blk = 350; // ~N/sqrt(Q)
-	vi s(sz(Q)), res = s, I(N), L(N), R(N), in(N), par(N);
+	int N = SZ(ed), pos[2] = {}, blk = 350; // ~N/sqrt(Q)
+	vi s(SZ(Q)), res = s, I(N), L(N), R(N), in(N), par(N);
 	add(0, 0), in[0] = 1;
 	auto dfs = [&](int x, int p, int dep, auto& f) -> void {
 		par[x] = p;

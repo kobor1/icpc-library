@@ -7,59 +7,24 @@ It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style progra
 
 See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
 
-## TODO
+## Maybe
 
-Data structures
+* Consult Matrix stuff
+* More geometry
+* More polynomials
+* 2-SAT functions
+* Better biconnected components
 * Persistent Segment Tree
-* Persistent Treap
-* Extended Li-Chao tree
-
-Geometry
-* Add dynamic convex hull
-* Review Voronoi/Delaunay
-* Add circle union
-* Add all segments intersections
-
-Graph
-* Add general matching (blossom)
-* Add 2SAT operators
-* Review EdgeColoring and add EdgeColoring for Bipartites
-* Review HLD
-* Review Link-Cut
-* Add dominatorTree
-* Add block-cut tree
-* Add centroid tree
-* Add TopTree
-* Add tree hashes
-
-Number theory
-* Add mobius inverse algo
-* Add Dirichlet convolution
-* Add counting primes
-* Multiplicative func. prefix sum
-* Add NimMultiplication
-
-Numerical
-* Add faster linear recurrence
-* Add transforms on different bits
-* Add polynomial operations (division, inversion, modulo, gcd)
-
-Strings
-* Review SuffixArray (add fast one?)
-* Review SuffixTree
-* Add SuffixAutomaton
-* Review Aho (add AhoBohun?)
-* Add Eertree
-* Add KMR
-* Add all substring LCS
-* Add Cyclic LCS
-* Add Bitset LCS
-* Add N * ANS LCS
-
-Various
-* Add Josephus problem solver
-* Review DivideAndConquerDP
-* Investigate Yarin-sieve
+* Circle union
+* Yarin Sieve
+* All segments intersections
+* Centroid tree
+* Mobius inverse algo
+* Dirichlet convolution
+* Counting primes
+* Faster linear recurrence
+* Transforms on different bits
+* Polynomial operations (division, inversion, modulo, gcd)
 
 ## Aspirations
 

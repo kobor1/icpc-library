@@ -27,8 +27,7 @@ ll sqrt(ll a, ll p) {
 	ll b = modpow(a, s, p), g = modpow(n, s, p);
 	for (;; r = m) {
 		ll t = b;
-		for (m = 0; m < r && t != 1; ++m)
-			t = t * t % p;
+		for (m = 0; m < r && t != 1; ++m) t = t * t % p;
 		if (m == 0) return x;
 		ll gs = modpow(g, 1LL << (r - m - 1), p);
 		g = gs * gs % p;

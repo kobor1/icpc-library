@@ -15,9 +15,9 @@
 
 using P = Point<double>;
 pair<int, P> hpInter(vector<pair<P, P>> hps) {
-	shuffle(all(hps), mt19937(time(0)));
+	shuffle(all(hps), mt19937(1337));
 	P cand;
-	FOR(i, 0, sz(hps)) {
+	FOR(i, 0, SZ(hps)) {
 		auto [s, e] = hps[i];
 		if(sideOf(s, e, cand) >= 0) continue;
 		P d = (e - s).unit();

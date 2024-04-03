@@ -11,12 +11,12 @@
 
 int knapsack(vi w, int t) {
 	int a = 0, b = 0, x;
-	while (b < sz(w) && a + w[b] <= t) a += w[b++];
-	if (b == sz(w)) return a;
+	while (b < SZ(w) && a + w[b] <= t) a += w[b++];
+	if (b == SZ(w)) return a;
 	int m = *max_element(all(w));
 	vi u, v(2*m, -1);
 	v[a+m-t] = b;
-	FOR(i,b,sz(w)) {
+	FOR(i,b,SZ(w)) {
 		u = v;
 		FOR(x,0,m) v[x+w[i]] = max(v[x+w[i]], u[x]);
 		for (x = 2*m; --x > m;) FOR(j, max(0,u[x]), v[x])

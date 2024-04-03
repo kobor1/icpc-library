@@ -28,7 +28,7 @@ struct LPSolver {
 	vvd D;
 
 	LPSolver(const vvd& A, const vd& b, const vd& c) :
-		m(sz(b)), n(sz(c)), N(n+1), B(m), D(m+2, vd(n+2)) {
+		m(SZ(b)), n(SZ(c)), N(n+1), B(m), D(m+2, vd(n+2)) {
 			FOR(i,0,m) FOR(j,0,n) D[i][j] = A[i][j];
 			FOR(i,0,m) { B[i] = n+i; D[i][n] = -1; D[i][n+1] = b[i];}
 			FOR(j,0,n) { N[j] = j; D[m][j] = -c[j]; }
