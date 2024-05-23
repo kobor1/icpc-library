@@ -21,5 +21,5 @@ array<P, 2> hullDiameter(vector<P> S) {
 			if ((S[(j + 1) % n] - S[j]).cross(S[i + 1] - S[i]) >= 0)
 				break;
 		}
-	return res.second;
+	return res.nd;
 }

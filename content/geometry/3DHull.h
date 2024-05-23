@@ -12,7 +12,7 @@
 
 #include "Point3D.h"
 
-using P3 = Point3D<double>;
+using P3 = Point3D<D>;
 
 struct PR {
 	void ins(int x) { (a == -1 ? a : b) = x; }

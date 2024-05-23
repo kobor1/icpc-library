@@ -14,19 +14,19 @@
 #include "Point.h"
 #include "sideOf.h"
 
-typedef Point<double> P;
-double rat(P a, P b) { return sgn(b.x) ? a.x/b.x : a.y/b.y; }
-double polyUnion(vector<vector<P>>& poly) {
-	double ret = 0;
+using P = Point<D>;
+D rat(P a, P b) { return sgn(b.x) ? a.x/b.x : a.y/b.y; }
+D polyUnion(vector<vector<P>> &poly) {
+	D ret = 0;
 	FOR(i,0,SZ(poly)) FOR(v,0,SZ(poly[i])) {
 		P A = poly[i][v], B = poly[i][(v + 1) % SZ(poly[i])];
-		vector<pair<double, int>> segs = {{0, 0}, {1, 0}};
+		vector<pair<D, int>> segs = {{0, 0}, {1, 0}};
 		FOR(j,0,SZ(poly)) if (i != j) {
 			FOR(u,0,SZ(poly[j])) {
 				P C = poly[j][u], D = poly[j][(u + 1) % SZ(poly[j])];
 				int sc = sideOf(A, B, C), sd = sideOf(A, B, D);
 				if (sc != sd) {
-					double sa = C.cross(D, A), sb = C.cross(D, B);
+					D sa = C.cross(D, A), sb = C.cross(D, B);
 					if (min(sc, sd) < 0)
 						segs.emplace_back(sa / (sa - sb), sgn(sc - sd));
 				} else if (!sc && !sd && j<i && sgn((B-A).dot(D-C))>0){
@@ -36,8 +36,8 @@ double polyUnion(vector<vector<P>>& poly) {
 			}
 		}
 		sort(all(segs));
-		for (auto& s : segs) s.st = min(max(s.st, 0.0), 1.0);
-		double sum = 0;
+		for (auto &s: segs) s.st = min(max(s.st, 0.0), 1.0);
+		D sum = 0;
 		int cnt = segs[0].nd;
 		FOR(j,1,SZ(segs)) {
 			if (!cnt) sum += segs[j].st - segs[j - 1].st;

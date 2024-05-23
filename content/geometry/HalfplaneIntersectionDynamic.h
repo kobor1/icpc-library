@@ -1,6 +1,6 @@
 /**
  * Author: kobor
- * Date: 2023-12-02
+ * Date: 2024-04-03
  * License: CC0
  * Source: bicsi's github
  * Description: Data structure that dynamically keeps track
@@ -10,27 +10,26 @@
  */
 #pragma once
 
-#include "sideOf.h"
 #include "lineIntersection.h"
 
-using P = Point<double>;
-int half(P a) { return a.y < 0 || (a.y == 0 && a.x < 0); }
+using P = Point<D>;
+int hf(P a) { return a.y < 0 || (a.y == 0 && a.x < 0); }
 
 struct polarCmp {
 	bool operator()(const P &a, const P &b) const {
-		if(half(a) == half(b)) return a.cross(b) > 0;
-		return half(a) < half(b);
+		return hf(a) == hf(b) ? a.cross(b) > 0 : hf(a) < hf(b);
 	}
 };
 
 struct HalfplaneSet : map<P, P, polarCmp> {
-	double INF = 1e6, area = 8 * INF * INF;	// two times area
+	D INF = 1e6, area = 8 * INF * INF;
 
 	HalfplaneSet() {
-		P p(-INF, -INF);
-		for(auto &d: {P(1, 0), P(0, 1), P(-1, 0), P(0, -1)}) {
+		P p(-INF, -INF), d(1, 0);
+		FOR(k, 0, 4) {
 			insert({d, p});
 			p = p + d * 2 * INF;
+			d = d.perp();
 		}
 	}
 
@@ -40,19 +39,21 @@ struct HalfplaneSet : map<P, P, polarCmp> {
 		return it == begin() ? prev(end()) : prev(it);
 	}
 
-	auto crossNext(auto it) {
-		return it->nd.cross(getNext(it)->nd);
+	auto uSide(auto it, int change) {	// 1 - add, -1 - del
+		area += change * it->nd.cross(getNext(it)->nd);
 	}
 
 	auto del(auto it) {
-		area -= crossNext(getPrev(it)) + crossNext(it);
+		uSide(getPrev(it), -1), uSide(it, -1);
 		it = fix(erase(it));
-		if(size()) area += crossNext(getPrev(it));
+		if(size()) uSide(getPrev(it), 1);
 		return it;
-	};
+	}
 
 	void add(P s, P e) {
-		auto eval = [&](auto it) { return sideOf(s, e, it->nd); };
+		auto eval = [&](auto it) { 
+			return sgn(s.cross(e, it->nd));
+		};
 		auto intersect = [&](auto it) {
 			return lineInter(s, e, it->nd, it->st + it->nd).nd;
 		};
@@ -63,22 +64,21 @@ struct HalfplaneSet : map<P, P, polarCmp> {
 		while(size() && eval(getNext(it)) < 0) it = del(it);
 		if(empty()) return;
 		if(eval(getNext(it)) > 0) {
-			area -= crossNext(getPrev(it)) + crossNext(it);
+			uSide(getPrev(it), -1), uSide(it, -1);
 			it->nd = intersect(it);
-			area += crossNext(getPrev(it)) + crossNext(it);
+			uSide(getPrev(it), 1), uSide(it, 1);
 		}
 		else it = del(it);
 		it = getPrev(it);
-		area -= crossNext(it);
+		uSide(it, -1);
 		insert(it, {e - s, intersect(it)});
-		area += crossNext(it) + crossNext(getNext(it));
+		uSide(it, 1), uSide(getNext(it), 1);
 		if(eval(it) == 0) del(it);
 	}
 
-	double maxDot(P a) {
-		auto it = fix(lower_bound(a.perp()));
-		return a.dot(it->nd);
+	D maxDot(P a) {
+		return a.dot(fix(lower_bound(a.perp()))->nd);
 	}
 
-	double getArea() { return area / 2; }
+	D getArea() { return area / 2; }
 };

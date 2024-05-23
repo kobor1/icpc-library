@@ -17,7 +17,7 @@
 #include "OnSegment.h"
 
 using P = Point<ll>;
-bool inHull(const vector<P>& l, P p, bool strict = true) {
+bool inHull(const vector<P> &l, P p, bool strict = true) {
 	int a = 1, b = SZ(l) - 1, r = !strict;
 	if (SZ(l) < 3) return r && onSegment(l[0], l.back(), p);
 	if (sideOf(l[0], l[a], l[b]) > 0) swap(a, b);

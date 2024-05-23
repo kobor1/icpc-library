@@ -9,7 +9,7 @@
 
 #include "Point.h"
 
-using T = long long;
+using T = ll;
 using P = Point<T>;
 const T INF = numeric_limits<T>::max();
 

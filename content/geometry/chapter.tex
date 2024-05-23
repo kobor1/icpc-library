@@ -28,22 +28,34 @@
 	\kactlimport{PolygonUnion.h}
 	\kactlimport{ConvexHull.h}
 	\kactlimport{HullDiameter.h}
+	\kactlimport{MinkowskiSum.h}
 	\kactlimport{PointInsideHull.h}
 	\kactlimport{LineHullIntersection.h}
 	\kactlimport{PolygonTangents.h}
-	\kactlimport{HalfplaneIntersection.h}
 	\kactlimport{HalfplaneIntersectionDynamic.h}
 
 \section{Misc. Point Set Problems}
 	\kactlimport{ClosestPair.h}
 	\kactlimport{ManhattanMST.h}
-	\kactlimport{kdTree.h}
+	\kactlimport{kDTree.h}
 	\kactlimport{DelaunayTriangulation.h}
 	\kactlimport{FastDelaunay.h}
 	\kactlimport{manySegmentsIntersection.h}
 
+\section{Spherical coordinates}
+
+\begin{center}
+\includegraphics[width=25mm]{content/geometry/sphericalCoordinates}
+\end{center}
+\[\begin{array}{cc}
+x = r\sin\theta\cos\phi & r = \sqrt{x^2+y^2+z^2}\\
+y = r\sin\theta\sin\phi & \theta = \textrm{acos}(z/\sqrt{x^2+y^2+z^2})\\
+z = r\cos\theta & \phi = \textrm{atan2}(y,x)
+\end{array}\]
+
 \section{3D}
 	\kactlimport{PolyhedronVolume.h}
 	\kactlimport{Point3D.h}
-	\kactlimport{3dHull.h}
+	\kactlimport{3DHull.h}
 	\kactlimport{sphericalDistance.h}
+	\kactlimport{SpheresIntersection.h}

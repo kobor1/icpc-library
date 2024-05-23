@@ -8,11 +8,11 @@
  */
 #pragma once
 
-double sphericalDistance(double f1, double t1,
-		double f2, double t2, double radius) {
-	double dx = sin(t2)*cos(f2) - sin(t1)*cos(f1);
-	double dy = sin(t2)*sin(f2) - sin(t1)*sin(f1);
-	double dz = cos(t2) - cos(t1);
-	double d = sqrt(dx*dx + dy*dy + dz*dz);
-	return radius*2*asin(d/2);
+using D = double;
+D sphericalDistance(D f1, D t1, D f2, D t2, D radius) {
+	D dx = sin(t2) * cos(f2) - sin(t1) * cos(f1);
+	D dy = sin(t2) * sin(f2) - sin(t1) * sin(f1);
+	D dz = cos(t2) - cos(t1);
+	D d = sqrt(dx * dx + dy * dy + dz * dz);
+	return radius * 2 * asin(d/2);
 }
