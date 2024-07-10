@@ -14,7 +14,7 @@ vi Manacher(string s) {
 	for(int i=0, m=0, k=0, p=0; i < 2*SZ(s) - 1; m = i++ - 1) {
 		while(p < k && i / 2 + r[m] != k) {
 			r[i++] = min(r[m--], (k + 1 - p++) / 2); }
-    	while(k+1 < SZ(s) && p > 0 && s[k+1] == s[p-1]) k++, p--;
+		while(k+1 < SZ(s) && p > 0 && s[k+1] == s[p-1]) k++, p--;
 		r[i] = (k + 1 - p++) / 2;
 	}
 	return r;

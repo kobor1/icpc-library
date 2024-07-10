@@ -32,7 +32,7 @@ template <class M1, class M2> struct MatroidIsect {
 		per(i, 0, n-1) if(m1.check(i) && m2.check(i)) {
 			iset[i] = 1, m1.add(i), m2.add(i);
 		}
-		while (augment());
+		while(augment());
 		vi ans;
 		FOR(i, 0, n) if(iset[i]) ans.pb(i);
 		return ans;
