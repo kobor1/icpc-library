@@ -13,14 +13,13 @@
 
 pair<P, D> mec(vector<P> ps) {
 	shuffle(all(ps), mt19937(1337));
-	P o = ps[0];
-	D r = 0, EPS = 1 + 1e-8;
-	FOR(i,0,SZ(ps)) if ((o - ps[i]).dist() > r * EPS) {
+	P o = ps[0]; D r = 0, EPS = 1 + 1e-8;
+	FOR(i, 0, SZ(ps)) if((o - ps[i]).dist() > r * EPS) {
 		o = ps[i], r = 0;
-		FOR(j,0,i) if ((o - ps[j]).dist() > r * EPS) {
+		FOR(j, 0, i) if((o - ps[j]).dist() > r * EPS) {
 			o = (ps[i] + ps[j]) / 2;
 			r = (o - ps[i]).dist();
-			FOR(k,0,j) if ((o - ps[k]).dist() > r * EPS) {
+			FOR(k, 0, j) if((o - ps[k]).dist() > r * EPS) {
 				o = ccCenter(ps[i], ps[j], ps[k]);
 				r = (o - ps[i]).dist();
 			}

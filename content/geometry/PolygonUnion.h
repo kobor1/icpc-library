@@ -21,26 +21,23 @@ D polyUnion(vector<vector<P>> &poly) {
 	FOR(i,0,SZ(poly)) FOR(v,0,SZ(poly[i])) {
 		P A = poly[i][v], B = poly[i][(v + 1) % SZ(poly[i])];
 		vector<pair<D, int>> segs = {{0, 0}, {1, 0}};
-		FOR(j,0,SZ(poly)) if (i != j) {
-			FOR(u,0,SZ(poly[j])) {
-				P C = poly[j][u], D = poly[j][(u + 1) % SZ(poly[j])];
-				int sc = sideOf(A, B, C), sd = sideOf(A, B, D);
-				if (sc != sd) {
-					D sa = C.cross(D, A), sb = C.cross(D, B);
-					if (min(sc, sd) < 0)
-						segs.emplace_back(sa / (sa - sb), sgn(sc - sd));
-				} else if (!sc && !sd && j<i && sgn((B-A).dot(D-C))>0){
-					segs.emplace_back(rat(C - A, B - A), 1);
-					segs.emplace_back(rat(D - A, B - A), -1);
-				}
+		FOR(j,0,SZ(poly)) if(i != j) FOR(u, 0, SZ(poly[j])) {
+			P C = poly[j][u], E = poly[j][(u + 1) % SZ(poly[j])];
+			int sc = sideOf(A, B, C), sd = sideOf(A, B, E);
+			if(sc != sd) {
+				D sa = C.cross(E, A), sb = C.cross(E, B);
+				if(min(sc, sd) < 0)
+					segs.emplace_back(sa / (sa - sb), sgn(sc - sd));
+			} else if(!sc && !sd && j<i && sgn((B-A).dot(E-C))>0) {
+				segs.emplace_back(rat(C - A, B - A), 1);
+				segs.emplace_back(rat(E - A, B - A), -1);
 			}
 		}
 		sort(all(segs));
-		for (auto &s: segs) s.st = min(max(s.st, 0.0), 1.0);
-		D sum = 0;
-		int cnt = segs[0].nd;
-		FOR(j,1,SZ(segs)) {
-			if (!cnt) sum += segs[j].st - segs[j - 1].st;
+		for(auto &s: segs) s.st = min(max(s.st, 0.0), 1.0);
+		D sum = 0; int cnt = segs[0].nd;
+		FOR(j, 1, SZ(segs)) {
+			if(!cnt) sum += segs[j].st - segs[j - 1].st;
 			cnt += segs[j].nd;
 		}
 		ret += A.cross(B) * sum;

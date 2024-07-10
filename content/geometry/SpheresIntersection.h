@@ -24,5 +24,5 @@ vector<P> trilaterate(P a, P b, P c, D p, D q, D r) {
 	D z = sqrt(fmax(z2, 0));
 	P sol = a + e_x * x + e_y * y;
 	if(z2 < EPS) return {sol};	
-	return {sol + e_z * z, sol - e_z * z};
+	return {sol - e_z * z, sol + e_z * z};
 }

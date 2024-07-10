@@ -20,14 +20,13 @@
 
 using Edge = array<ll, 3>;
 vector<Edge> gomoryHu(int N, vector<Edge> ed) {
-	vector<Edge> tree;
-	vi par(N);
-	FOR(i,1,N) {
+	vector<Edge> tree; vi par(N);
+	FOR(i, 1, N) {
 		Dinic D(N); // Any flow works
-		for (Edge t : ed) D.addEdge(t[0], t[1], t[2], t[2]);
+		for(Edge t: ed) D.addEdge(t[0], t[1], t[2], t[2]);
 		tree.pb({i, par[i], D.calc(i, par[i])});
-		FOR(j,i+1,N)
-			if (par[j] == par[i] && D.leftOfMinCut(j)) par[j] = i;
+		FOR(j, i+1, N)
+			if(par[j] == par[i] && D.leftOfMinCut(j)) par[j] = i;
 	}
 	return tree;
 }

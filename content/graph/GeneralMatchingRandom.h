@@ -8,20 +8,17 @@
 #pragma once
 
 const int N = 510;
-vi g[N];
-int lnk[N], vis[N], tim;
+vi g[N]; int lnk[N], vis[N], tim; // 1-indexed
 
 bool dfs(int x) {
 	if(!x) return 1;
-	vis[x] = tim;
-	random_shuffle(all(g[x]));
+	vis[x] = tim; random_shuffle(all(g[x]));
 	for(int u: g[x]) {
 		int v = lnk[u];
 		if(vis[v] < tim) {
 			lnk[x] = u, lnk[u] = x, lnk[v] = 0;
 			if(dfs(v)) return 1;
-			lnk[u] = v, lnk[v] = u, lnk[x] = 0;
-		}
+			lnk[u] = v, lnk[v] = u, lnk[x] = 0; }
 	}
 	return 0;
 }

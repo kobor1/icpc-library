@@ -15,7 +15,7 @@
 // or work mod 10^9+7 if the Birthday paradox is not a problem.
 using ull = unsigned long long;
 struct H {
-	ull x; H(ull x=0) : x(x) {}
+	ull x; H(ull _x=0) : x(_x) {}
 	H operator+(H o) { return x + o.x + (x + o.x < x); }
 	H operator-(H o) { return *this + ~o.x; }
 	H operator*(H o) { auto m = (__uint128_t)x * o.x;

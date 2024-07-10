@@ -46,15 +46,14 @@ void splice(Q a, Q b) {
 }
 Q connect(Q a, Q b) {
 	Q q = makeEdge(a->F(), b->p);
-	splice(q, a->next());
-	splice(q->r(), b);
+	splice(q, a->next()); splice(q->r(), b);
 	return q;
 }
 
 pair<Q,Q> rec(const vector<P>& s) {
-	if (SZ(s) <= 3) {
+	if(SZ(s) <= 3) {
 		Q a = makeEdge(s[0], s[1]), b = makeEdge(s[1], s.back());
-		if (SZ(s) == 2) return { a, a->r() };
+		if(SZ(s) == 2) return { a, a->r() };
 		splice(a->r(), b);
 		auto side = s[0].cross(s[1], s[2]);
 		Q c = side ? connect(b, a) : 0;
@@ -67,33 +66,32 @@ pair<Q,Q> rec(const vector<P>& s) {
 	int half = SZ(s) / 2;
 	tie(ra, A) = rec({all(s) - half});
 	tie(B, rb) = rec({SZ(s) - half + all(s)});
-	while ((B->p.cross(H(A)) < 0 && (A = A->next())) ||
-	       (A->p.cross(H(B)) > 0 && (B = B->r()->o)));
+	while((B->p.cross(H(A)) < 0 && (A = A->next())) ||
+	    	(A->p.cross(H(B)) > 0 && (B = B->r()->o)));
 	Q base = connect(B->r(), A);
-	if (A->p == ra->p) ra = base->r();
-	if (B->p == rb->p) rb = base;
+	if(A->p == ra->p) ra = base->r();
+	if(B->p == rb->p) rb = base;
 
 #define DEL(e, init, dir) Q e = init->dir; if (valid(e)) \
-		while (circ(e->dir->F(), H(base), e->F())) { \
+		while(circ(e->dir->F(), H(base), e->F())) { \
 			Q t = e->dir; \
 			splice(e, e->prev()); \
 			splice(e->r(), e->r()->prev()); \
 			e->o = H; H = e; e = t; \
 		}
-	for (;;) {
+	for(;;) {
 		DEL(LC, base->r(), o);  DEL(RC, base, prev());
-		if (!valid(LC) && !valid(RC)) break;
-		if (!valid(LC) || (valid(RC) && circ(H(RC), H(LC))))
-			base = connect(RC, base->r());
-		else
-			base = connect(base->r(), LC->r());
+		if(!valid(LC) && !valid(RC)) break;
+		if(!valid(LC) || (valid(RC) && circ(H(RC), H(LC)))) {
+			base = connect(RC, base->r()); }
+		else base = connect(base->r(), LC->r());
 	}
 	return { ra, rb };
 }
 
 vector<P> triangulate(vector<P> pts) {
-	sort(all(pts));  assert(unique(all(pts)) == pts.end());
-	if (SZ(pts) < 2) return {};
+	sort(all(pts)); assert(unique(all(pts)) == pts.end());
+	if(SZ(pts) < 2) return {};
 	Q e = rec(pts).first;
 	vector<Q> q = {e};
 	int qi = 0;
@@ -101,6 +99,6 @@ vector<P> triangulate(vector<P> pts) {
 #define ADD { Q c = e; do { c->mark = 1; pts.pb(c->p); \
 	q.pb(c->r()); c = c->next(); } while (c != e); }
 	ADD; pts.clear();
-	while (qi < SZ(q)) if (!(e = q[qi++])->mark) ADD;
+	while(qi < SZ(q)) if (!(e = q[qi++])->mark) ADD;
 	return pts;
 }

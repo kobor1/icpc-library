@@ -19,23 +19,19 @@ struct Treap {
 		Node(int v) : size(1), val(v), mn(v), sum(v) {}
 	};
 	vector<Node> t;
-
 	Treap() : t(1) {}
 
 	void pull(int v) {
 		auto [l, r] = t[v].ch;
 		t[v].size = t[l].size + 1 + t[r].size;
-		t[v].mn = min({t[l].val, t[v].val, t[r].val});
+		t[v].mn = min({t[l].mn, t[v].val, t[r].mn});
 		t[v].sum = t[l].sum + t[v].val + t[r].sum;
 	}
 
 	int apply(int v, bool flip, int add) {
 		if(!v) return 0;
 		// t.pb(t[v]); v = SZ(t) - 1; 			// <- persistency
-		if(flip) {
-			t[v].flip ^= 1;
-			swap(t[v].ch[0], t[v].ch[1]);
-		}
+		if(flip) t[v].flip ^= 1, swap(t[v].ch[0], t[v].ch[1]);
 		t[v].val += add; t[v].mn += add;
 		t[v].sum += add * t[v].size;
 		t[v].add += add;
@@ -89,7 +85,7 @@ struct Treap {
 	}
 
 	void erase(int &v, int l, int r) {
-		// if(v) t.pb(t[v]); v = SZ(t) - 1; 	// <- persistency
+		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
 		auto [u, s] = split(q, r - l + 1);
 		// auto [u, s] = split(q, r + 1);		// <- by values
@@ -97,7 +93,7 @@ struct Treap {
 	}
 
 	void modify(int &v, int l, int r, bool flip, int add) {
-		// if(v) t.pb(t[v]); v = SZ(t) - 1; 	// <- persistency
+		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
 		auto [u, s] = split(q, r - l + 1);
 		// auto [u, s] = split(q, r + 1);		// <- by values
@@ -106,7 +102,7 @@ struct Treap {
 	}
 
 	pii get(int &v, int l, int r) {
-		// if(v) t.pb(t[v]); v = SZ(t) - 1; 	// <- persistency
+		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
 		auto [u, s] = split(q, r - l + 1);
 		// auto [u, s] = split(q, r + 1);		// <- by values
@@ -128,7 +124,7 @@ struct Treap {
 
 	// only when by values, persistency destroys complexity
 	void increase(int &v, int l, int r, int increase) { 
-		// if(v) t.pb(t[v]); v = SZ(t) - 1;	// <- persistency
+		// if(v) t.pb(t[v]), v = SZ(t) - 1;	// <- persistency
 		auto [p, q] = split(v, l);
 		auto [u, s] = split(q, r + 1);
 		u = apply(u, 0, increase);

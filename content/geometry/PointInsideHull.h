@@ -19,11 +19,11 @@
 using P = Point<ll>;
 bool inHull(const vector<P> &l, P p, bool strict = true) {
 	int a = 1, b = SZ(l) - 1, r = !strict;
-	if (SZ(l) < 3) return r && onSegment(l[0], l.back(), p);
-	if (sideOf(l[0], l[a], l[b]) > 0) swap(a, b);
-	if (sideOf(l[0], l[a], p) >= r || sideOf(l[0], l[b], p)<= -r)
-		return false;
-	while (abs(a - b) > 1) {
+	if(SZ(l) < 3) return r && onSegment(l[0], l.back(), p);
+	if(sideOf(l[0], l[a], l[b]) > 0) swap(a, b);
+	if(sideOf(l[0], l[a], p) >= r || sideOf(l[0], l[b], p)<= -r)
+		return 0;
+	while(abs(a - b) > 1) {
 		int c = (a + b) / 2;
 		(sideOf(l[0], l[c], p) > 0 ? b : a) = c;
 	}

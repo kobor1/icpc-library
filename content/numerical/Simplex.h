@@ -23,9 +23,7 @@ const T eps = 1e-8, inf = 1/.0;
 #define ltj(X) if(s == -1 || mp(X[j],N[j]) < mp(X[s],N[s])) s=j
 
 struct LPSolver {
-	int m, n;
-	vi N, B;
-	vvd D;
+	int m, n; vi N, B; vvd D;
 
 	LPSolver(const vvd& A, const vd& b, const vd& c) :
 		m(SZ(b)), n(SZ(c)), N(n+1), B(m), D(m+2, vd(n+2)) {
@@ -37,30 +35,29 @@ struct LPSolver {
 
 	void pivot(int r, int s) {
 		T *a = D[r].data(), inv = 1 / a[s];
-		FOR(i,0,m+2) if (i != r && abs(D[i][s]) > eps) {
+		FOR(i, 0, m+2) if(i != r && abs(D[i][s]) > eps) {
 			T *b = D[i].data(), inv2 = b[s] * inv;
-			FOR(j,0,n+2) b[j] -= a[j] * inv2;
+			FOR(j, 0, n+2) b[j] -= a[j] * inv2;
 			b[s] = a[s] * inv2;
 		}
-		FOR(j,0,n+2) if (j != s) D[r][j] *= inv;
-		FOR(i,0,m+2) if (i != r) D[i][s] *= -inv;
-		D[r][s] = inv;
-		swap(B[r], N[s]);
+		FOR(j, 0, n+2) if(j != s) D[r][j] *= inv;
+		FOR(i, 0, m+2) if(i != r) D[i][s] *= -inv;
+		D[r][s] = inv; swap(B[r], N[s]);
 	}
 
 	bool simplex(int phase) {
 		int x = m + phase - 1;
-		for (;;) {
+		for(;;) {
 			int s = -1;
-			FOR(j,0,n+1) if (N[j] != -phase) ltj(D[x]);
-			if (D[x][s] >= -eps) return true;
+			FOR(j, 0, n+1) if(N[j] != -phase) ltj(D[x]);
+			if(D[x][s] >= -eps) return 1;
 			int r = -1;
 			FOR(i,0,m) {
-				if (D[i][s] <= eps) continue;
-				if (r == -1 || mp(D[i][n+1] / D[i][s], B[i])
+				if(D[i][s] <= eps) continue;
+				if(r == -1 || mp(D[i][n+1] / D[i][s], B[i])
 				             < mp(D[r][n+1] / D[r][s], B[r])) r = i;
 			}
-			if (r == -1) return false;
+			if(r == -1) return 0;
 			pivot(r, s);
 		}
 	}

@@ -20,7 +20,8 @@ int n, A, sa[N], lcp[N], cnt[N];
 vi x, y;
 
 bool dif(int a, int b, int k) {
-    return y[a] != y[b] || (a + k <= n ? y[a + k] : -1) != (b + k <= n ? y[b + k] : -1);
+    return y[a] != y[b] ||
+    (a + k <= n ? y[a + k] : -1) != (b + k <= n ? y[b + k] : -1);
 }
 /* 1-indexed */
 void build() {
@@ -32,13 +33,12 @@ void build() {
     for(int k = 1; k < n; k *= 2) {
         int p = 0;
         rep(i, n - k + 1, n) y[++p] = i;
-        rep(i, 1, n) if (sa[i] > k) y[++p] = sa[i] - k;
+        rep(i, 1, n) if(sa[i] > k) y[++p] = sa[i] - k;
         rep(i, 1, A) cnt[i] = 0;
         rep(i, 1, n) cnt[x[i]]++;
         rep(i, 1, A) cnt[i] += cnt[i - 1];
         per(i, 1, n) sa[cnt[x[y[i]]]--] = y[i];
-        swap(x, y);
-        A = x[sa[1]] = 1;
+        swap(x, y); A = x[sa[1]] = 1;
         rep(i, 2, n) x[sa[i]] = (A += dif(sa[i - 1], sa[i], k));
         if(n == A) break; 
     }

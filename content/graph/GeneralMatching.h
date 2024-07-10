@@ -14,38 +14,35 @@
 
 vector<pii> generalMatching(int N, vector<pii>& ed) {
 	vector<vector<ll>> mat(N, vector<ll>(N)), A;
-	for (pii pa : ed) {
+	for(pii pa : ed) {
 		int a = pa.st, b = pa.nd, r = rand() % mod;
 		mat[a][b] = r, mat[b][a] = (mod - r) % mod;
 	}
-
 	int r = matInv(A = mat), M = 2*N - r, fi, fj;
 	assert(r % 2 == 0);
-
-	if (M != N) do {
+	if(M != N) do {
 		mat.resize(M, vector<ll>(M));
-		FOR(i,0,N) {
+		FOR(i, 0, N) {
 			mat[i].resize(M);
-			FOR(j,N,M) {
+			FOR(j, N, M) {
 				int r = rand() % mod;
 				mat[i][j] = r, mat[j][i] = (mod - r) % mod;
 			}
 		}
-	} while (matInv(A = mat) != M);
-
+	} while(matInv(A = mat) != M);
 	vi has(M, 1); vector<pii> ret;
-	FOR(it,0,M/2) {
-		FOR(i,0,M) if (has[i])
-			FOR(j,i+1,M) if (A[i][j] && mat[i][j]) {
-				fi = i; fj = j; goto done;
-		} assert(0); done:
-		if (fj < N) ret.emplace_back(fi, fj);
+	FOR(it, 0, M / 2) {
+		FOR(i, 0, M) if(has[i]) FOR(j,i+1,M) 
+			if(A[i][j] && mat[i][j]) {
+				fi = i; fj = j; goto done; }
+		assert(0); done:
+		if(fj < N) ret.emplace_back(fi, fj);
 		has[fi] = has[fj] = 0;
-		FOR(sw,0,2) {
+		FOR(sw, 0, 2) {
 			ll a = modpow(A[fi][fj], mod-2);
-			FOR(i,0,M) if (has[i] && A[i][fj]) {
+			FOR(i, 0, M) if(has[i] && A[i][fj]) {
 				ll b = A[i][fj] * a % mod;
-				FOR(j,0,M) A[i][j] = (A[i][j] - A[fi][j] * b) % mod;
+				FOR(j, 0, M) A[i][j] = (A[i][j] - A[fi][j] * b) % mod;
 			}
 			swap(fi,fj);
 		}

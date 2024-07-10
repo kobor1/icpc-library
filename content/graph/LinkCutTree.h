@@ -60,9 +60,8 @@ struct SplayTree {
 	}
 };
 
-struct LinkCut : SplayTree {	// One-indexed
+struct LinkCut : SplayTree {	// 1-indexed
 	LinkCut(int n) : SplayTree(n) {}
-
 	int access(int v) {
 		int u = v, x = 0;
 		for(; u; x = u, u = t[u].p) {
@@ -74,40 +73,26 @@ struct LinkCut : SplayTree {	// One-indexed
 		}
 		return splay(v), x;
 	}
-
-	void reroot(int v) {
-		access(v), t[v].flip ^= 1, push(v);
-	}
-
+	void reroot(int v) { access(v), t[v].flip ^= 1, push(v); }
 	void link(int u, int v) {
 		reroot(u), access(v);
-		t[v].vir += t[u].sub;
-		t[u].p = v, pull(v);
+		t[v].vir += t[u].sub; t[u].p = v, pull(v);
 	}
-
 	void cut(int u, int v) {
-		reroot(u), access(v);
-		t[v].ch[0] = t[u].p = 0, pull(v);
+		reroot(u), access(v); t[v].ch[0] = t[u].p = 0, pull(v);
 	}
-
 	// Rooted tree LCA. Returns 0 if u and v are not connected.
 	int lca(int u, int v) {
 		if(u == v) return u;
-		access(u); int ret = access(v);
-		return t[u].p ? ret : 0;
+		access(u); int ret = access(v); return t[u].p ? ret : 0;
 	}
-
 	// Query subtree of u where v is outside the subtree.
 	ll getSub(int u, int v) {
-		reroot(v), access(u);
-		return t[u].vir + t[u].self;
+		reroot(v), access(u); return t[u].vir + t[u].self;
 	}
-
 	ll getPath(int u, int v) {
-		reroot(u), access(v);
-		return t[v].path;
+		reroot(u), access(v); return t[v].path;
 	}
-
 	// Update vertex u with value val
 	void update(int u, ll val) {
 		access(u), t[u].self = val, pull(u);

@@ -13,13 +13,13 @@
 
 vector<string> duval(string s) {
 	int N = SZ(s); vector<string> factors;
-	for (int i = 0; i < N; ) {
+	for(int i = 0; i < N; ) {
 		int j = i+1, k = i;
-		for (; j < N && s[k] <= s[j]; ++j) {
+		for(; j < N && s[k] <= s[j]; ++j) {
 			if (s[k] < s[j]) k = i;
 			else ++k;
 		}
-		for (; i <= k; i += j-k) factors.pb(s.substr(i,j-k));
+		for(; i <= k; i += j-k) factors.pb(s.substr(i,j-k));
 	}
 	return factors;
 }
@@ -27,7 +27,7 @@ vector<string> duval(string s) {
 int minRotation(string s) { 
 	int N = SZ(s); s += s;
 	vector<string> d = duval(s); int ind = 0, ans = 0;
-	while (ans + SZ(d[ind]) < N) ans += SZ(d[ind++]);
-	while (ind && d[ind] == d[ind-1]) ans -= SZ(d[ind--]);
+	while(ans + SZ(d[ind]) < N) ans += SZ(d[ind++]);
+	while(ind && d[ind] == d[ind-1]) ans -= SZ(d[ind--]);
 	return ans;
 }

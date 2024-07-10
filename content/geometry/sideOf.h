@@ -17,7 +17,6 @@ int sideOf(P s, P e, P p) { return sgn(s.cross(e, p)); }
 
 template<class P>
 int sideOf(const P& s, const P& e, const P& p, D eps) {
-	auto a = (e-s).cross(p-s);
-	D l = (e-s).dist()*eps;
+	auto a = (e-s).cross(p-s); D l = (e-s).dist()*eps;
 	return (a > l) - (a < -l);
 }

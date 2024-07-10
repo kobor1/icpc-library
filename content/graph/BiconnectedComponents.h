@@ -25,20 +25,19 @@ int Time;
 template<class F>
 int dfs(int at, int par, F& f) {
 	int me = num[at] = ++Time, top = me;
-	for (auto [y, e] : ed[at]) if (e != par) {
-		if (num[y]) {
+	for(auto [y, e]: ed[at]) if(e != par) {
+		if(num[y]) {
 			top = min(top, num[y]);
-			if (num[y] < me) st.pb(e);
-		} else {
-			int si = SZ(st);
-			int up = dfs(y, e, f);
+			if(num[y] < me) st.pb(e); }
+		else {
+			int si = SZ(st), up = dfs(y, e, f);
 			top = min(top, up);
-			if (up == me) {
+			if(up == me) {
 				st.pb(e);
 				f(vi(st.begin() + si, st.end()));
 				st.resize(si);
 			}
-			else if (up < me) st.pb(e);
+			else if(up < me) st.pb(e);
 			else { /* e is a bridge */ }
 		}
 	}
@@ -48,5 +47,5 @@ int dfs(int at, int par, F& f) {
 template<class F>
 void bicomps(F f) {
 	num.assign(SZ(ed), 0);
-	FOR(i,0,SZ(ed)) if (!num[i]) dfs(i, -1, f);
+	FOR(i, 0, SZ(ed)) if(!num[i]) dfs(i, -1, f);
 }

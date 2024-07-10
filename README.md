@@ -7,10 +7,27 @@ It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style progra
 
 See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
 
-## Maybe
+## TODO
+
+* Matroids - Weighted Intersection / Partition
+* Update contest catalog (hash to template, better compilation, mem usage counting etc.)
+* Extended LiChao
+* Dominator tree
+* PrefixSumMultiplicative
+* Polynomial.h is a joke, Polynomial Divison, PolyRoots
+* Try simplex
+* Someone should review strings
+* LyndonFactor is similar to MinRotation
+* Review Angle.h
+* Use DelaunayTriangulation (Slow and Fast)
+
+
 
 * Consult Matrix stuff
-* More geometry
+* Better halfplanes
+* Fast polygon cut
+* Point location
+* Sweep around
 * More polynomials
 * 2-SAT functions
 * Better biconnected components
@@ -25,6 +42,11 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 * Faster linear recurrence
 * Transforms on different bits
 * Polynomial operations (division, inversion, modulo, gcd)
+* Restore MaxClique
+* Trilaterate
+* kth-shortest path
+* NimMultiplication
+
 
 ## Aspirations
 

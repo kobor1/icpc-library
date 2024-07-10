@@ -8,7 +8,7 @@
 	*	p\_c : the prefix sum of f * g (x) (0 <= x <= N).
 	*	th : the thereshold, generally should be $N^\frac{2}{3}$.
  * Source: https://codeforces.com/blog/entry/54150
- * Time: $O(N^\frac{2}{3})$
+ * Time: O(N^\frac{2}{3})
  */
 #pragma once
 

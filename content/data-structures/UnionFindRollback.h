@@ -23,10 +23,10 @@ struct RollbackUF {
 	}
 	bool join(int a, int b) {
 		a = find(a), b = find(b);
-		if (a == b) return false;
-		if (e[a] > e[b]) swap(a, b);
+		if(a == b) return 0;
+		if(e[a] > e[b]) swap(a, b);
 		st.pb({a, e[a]}); st.pb({b, e[b]});
 		e[a] += e[b]; e[b] = a;
-		return true;
+		return 1;
 	}
 };

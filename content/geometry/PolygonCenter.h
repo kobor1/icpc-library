@@ -14,7 +14,7 @@
 using P = Point<D>;
 P polygonCenter(const vector<P>& v) {
 	P res(0, 0); D A = 0;
-	for (int i = 0, j = SZ(v) - 1; i < SZ(v); j = i++) {
+	for(int i = 0, j = SZ(v) - 1; i < SZ(v); j = i++) {
 		res = res + (v[i] + v[j]) * v[j].cross(v[i]);
 		A += v[j].cross(v[i]);
 	}

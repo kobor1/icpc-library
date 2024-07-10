@@ -9,7 +9,7 @@
  */
 #pragma once
 
-vi pi(const string& s) {
+vi pi(const string &s) {
 	vi p(SZ(s));
 	FOR(i, 1, SZ(s)) {
 		int g = p[i-1];
@@ -19,7 +19,7 @@ vi pi(const string& s) {
 	return p;
 }
 
-vi match(const string& s, const string& pat) {
+vi match(const string &s, const string &pat) {
 	vi p = pi(pat + '\0' + s), res;
 	FOR(i, SZ(p)-SZ(s), SZ(p))
 		if(p[i] == SZ(pat)) res.pb(i - 2 * SZ(pat));

@@ -20,7 +20,7 @@ struct Hasher {
 		}
 	}
 	ll hashInterval(int a, int b) { // hash [a, b]
-		ll res = (ha[b + 1] - __int128(ha[a]) * pw[b + 1 - a]) % mod;
+		ll res = (ha[b+1] - __int128(ha[a]) * pw[b+1 - a]) % mod;
 		return res < 0 ? res + mod : res;
 	}
 };

@@ -10,20 +10,18 @@
 #pragma once
 
 const ll mod = 12345;
-ll det(vector<vector<ll>>& a) {
+ll det(vector<vector<ll>> &a) {
 	int n = SZ(a); ll ans = 1;
-	FOR(i,0,n) {
-		FOR(j,i+1,n) {
-			while (a[j][i] != 0) { // gcd step
-				ll t = a[i][i] / a[j][i];
-				if (t) FOR(k,i,n)
-					a[i][k] = (a[i][k] - a[j][k] * t) % mod;
-				swap(a[i], a[j]);
-				ans *= -1;
-			}
+	FOR(i, 0, n) {
+		FOR(j, i+1, n) while(a[j][i] != 0) { // gcd step
+			ll t = a[i][i] / a[j][i];
+			if(t) FOR(k, i, n) {
+				a[i][k] = (a[i][k] - a[j][k] * t) % mod; }
+			swap(a[i], a[j]);
+			ans *= -1;
 		}
 		ans = ans * a[i][i] % mod;
-		if (!ans) return 0;
+		if(!ans) return 0;
 	}
 	return (ans + mod) % mod;
 }

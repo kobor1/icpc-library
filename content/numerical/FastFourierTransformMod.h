@@ -17,7 +17,7 @@
 
 using vll = vector<ll>;
 template<int M> vll convMod(const vll &a, const vll &b) {
-	if (a.empty() || b.empty()) return {};
+	if(a.empty() || b.empty()) return {};
 	vll res(SZ(a) + SZ(b) - 1);
 	int B=32-__builtin_clz(SZ(res)), n=1<<B, cut=int(sqrt(M));
 	vector<C> L(n), R(n), outs(n), outl(n);
@@ -30,7 +30,7 @@ template<int M> vll convMod(const vll &a, const vll &b) {
 		outs[j] = (L[i] - conj(L[j])) * R[i] / (2.0 * n) / 1i;
 	}
 	fft(outl), fft(outs);
-	FOR(i,0,SZ(res)) {
+	FOR(i, 0, SZ(res)) {
 		ll av = ll(real(outl[i])+.5), cv = ll(imag(outs[i])+.5);
 		ll bv = ll(imag(outl[i])+.5) + ll(real(outs[i])+.5);
 		res[i] = ((av % M * cut + bv) % M * cut + cv) % M;

@@ -11,36 +11,28 @@
 #pragma once
 
 using bs = bitset<1000>;
-
 int solveLinear(vector<bs>& A, vi& b, bs& x, int m) {
 	int n = SZ(A), rank = 0, br;
 	assert(m <= SZ(x));
 	vi col(m); iota(all(col), 0);
-	FOR(i,0,n) {
-		for (br=i; br<n; ++br) if (A[br].any()) break;
-		if (br == n) {
+	FOR(i, 0, n) {
+		for(br = i; br < n; br++) if(A[br].any()) break;
+		if(br == n) {
 			FOR(j,i,n) if(b[j]) return -1;
-			break;
-		}
+			break; }
 		int bc = (int)A[br]._Find_next(i-1);
-		swap(A[i], A[br]);
-		swap(b[i], b[br]);
+		swap(A[i], A[br]); swap(b[i], b[br]);
 		swap(col[i], col[bc]);
-		FOR(j,0,n) if (A[j][i] != A[j][bc]) {
-			A[j].flip(i); A[j].flip(bc);
-		}
-		FOR(j,i+1,n) if (A[j][i]) {
-			b[j] ^= b[i];
-			A[j] ^= A[i];
-		}
+		FOR(j, 0, n) if(A[j][i] != A[j][bc]) {
+			A[j].flip(i); A[j].flip(bc); }
+		FOR(j, i+1, n) if(A[j][i]) b[j] ^= b[i], A[j] ^= A[i];
 		rank++;
 	}
-
 	x = bs();
-	for (int i = rank; i--;) {
-		if (!b[i]) continue;
+	for(int i = rank; i--;) {
+		if(!b[i]) continue;
 		x[col[i]] = 1;
-		FOR(j,0,i) b[j] ^= A[j][i];
+		FOR(j, 0, i) b[j] ^= A[j][i];
 	}
 	return rank; // (multiple solutions if rank < m)
 }

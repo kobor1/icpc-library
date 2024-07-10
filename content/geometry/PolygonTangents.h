@@ -21,17 +21,17 @@ template <class P>
 array<int, 2> polygonTangents(vector<P>& poly, P p) {
 	auto bs = [&](int ph) {
 		int n = sz(poly), lo = 0, hi = n;
-		if (extr(0)) return 0;
+		if(extr(0)) return 0;
 		while(lo + 1 < hi) {
 			int m = (lo + hi) / 2;
-			if (extr(m)) return m;
+			if(extr(m)) return m;
 			int ls = cmp(lo + 1, lo), ms = cmp(m + 1, m);
 			(ls < ms || (ls == ms && ls == cmp(lo, m)) ? hi:lo) = m;
 		}
 		return lo;
 	};
 	array<int, 2> res = {bs(0), bs(1)};
-	if(res[0] == res[1]) res[0] = (res[0] + 1) % sz(poly);
-	if(poly[res[0]] == p) res[0] = (res[0] + 1) % sz(poly);
+	if(res[0] == res[1]) res[0] = (res[0] + 1) % SZ(poly);
+	if(poly[res[0]] == p) res[0] = (res[0] + 1) % SZ(poly);
 	return res;
 }

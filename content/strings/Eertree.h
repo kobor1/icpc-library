@@ -14,8 +14,7 @@ char s[N];
 void prepare(int n) { // 0 <= i <= n + 1
 	rep(i, 0, n + 1) FOR(j, 0, A) nxt[i][j] = 0;
 	s[0] = '#'; // CUSTOM
-	last[0] = cnt = 1;
-	fail[0] = fail[1] = 1;
+	last[0] = cnt = fail[0] = fail[1] = 1;
 	len[1] = -1;
 }
 
