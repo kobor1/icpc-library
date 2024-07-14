@@ -1,6 +1,6 @@
 /**
  * Author: kobor
- * Date: 2024-03-22
+ * Date: 2024-07-12
  * License: CC0
  * Description: Finds one of the segments intersections.
  * Time: $O(N \log N)$
@@ -9,10 +9,10 @@
 #pragma once
 
 #include "SegmentIntersection.h"
+#include "SegmentXcompare.h"
 
-template<class T>
-pii allIntersect(vector<pair<Point<T>, Point<T>>> a) {
-	using P = Point<T>;
+template<class P>
+pii allIntersect(vector<pair<P, P>> a) {
 	vector<tuple<P, int, int>> e;
 	FOR(i, 0, SZ(a)) {
 		if(a[i].nd < a[i].st) swap(a[i].st, a[i].nd);
@@ -20,14 +20,8 @@ pii allIntersect(vector<pair<Point<T>, Point<T>>> a) {
 	}
 	sort(all(e));
 	auto cmp = [](auto bb, auto cc) {
-		auto [bs, be] = bb.st;
-		auto [cs, ce] = cc.st;
-		P sh(max(bs.x, cs.x), 0);
-		auto bv = be - bs, cv = ce - cs;
-		T l = bv.cross(bs - sh), r = cv.cross(cs - sh);
-		// care! M^3
-		return (sgn(cv.x) ? cv.x : 1) * (sgn(bv.x) ? l : bs.y) <
-			   (sgn(bv.x) ? bv.x : 1) * (sgn(cv.x) ? r : cs.y);
+		auto [bs, be] = bb.st; auto [cs, ce] = cc.st;
+		return segXcompare(bs, be, cs, ce);
 	};
 	auto inter = [](auto bb, auto cc) {
 		return segInter(bb.st, bb.nd, cc.st, cc.nd);

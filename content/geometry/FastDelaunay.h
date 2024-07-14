@@ -90,9 +90,9 @@ pair<Q,Q> rec(const vector<P>& s) {
 }
 
 vector<P> triangulate(vector<P> pts) {
-	sort(all(pts)); assert(unique(all(pts)) == pts.end());
+	sort(all(pts)); //assert(unique(all(pts)) == pts.end());
 	if(SZ(pts) < 2) return {};
-	Q e = rec(pts).first;
+	Q e = rec(pts).st;
 	vector<Q> q = {e};
 	int qi = 0;
 	while (e->o->F().cross(e->F(), e->p) < 0) e = e->o;

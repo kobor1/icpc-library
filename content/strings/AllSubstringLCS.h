@@ -14,13 +14,12 @@ void all_substring_lcs(string s, string t) {
 	rep(i, 1, m) f[0][i] = i;
 	rep(i, 1, n) rep(j, 1, m) {
 		if(s[i] == t[j]) {
-			f[i][j] = g[i][j - 1];
-			g[i][j] = f[i - 1][j]; } 
-		else {
+			f[i][j] = g[i][j - 1]; g[i][j] = f[i - 1][j];
+		} else {
 			f[i][j] = max(f[i - 1][j], g[i][j - 1]);
-			g[i][j] = min(g[i][j - 1], f[i - 1][j]); }
+			g[i][j] = min(g[i][j - 1], f[i - 1][j]);
+		}
 	}
 	rep(i, 1, m) for(int j = i, a = 0; j <= m; ++j) {
-		a += i > f[n][j];
-		ans[i][j] = a; }
+		a += i > f[n][j]; ans[i][j] = a; }
 }

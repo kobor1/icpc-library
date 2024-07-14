@@ -3,16 +3,15 @@
  * Date: 2024-03-22
  * License: CC0
  * Source: own work
- * Description: Builds a centroid tree. 0-indexed
+ * Description: Builds a centroid tree.
  * Time: O(N \log N)
  * Status: tested
  */
 #pragma once
 
-struct CentroidTree {
+struct CentroidTree {		// 0-indexed
 	vector<vector<pii>> G;	// {neighbour, distance}
-	constexpr int LOG = 20;
-	vector<ll> dist[LOG];
+	constexpr int LOG = 20; vector<ll> dist[LOG];
 	vi sz, block, par, dpth;
 
 	CentroidTree(vector<vector<pii>> &_G) : G(_G) {

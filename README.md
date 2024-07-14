@@ -9,44 +9,31 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 
 ## TODO
 
-* Matroids - Weighted Intersection / Partition
 * Update contest catalog (hash to template, better compilation, mem usage counting etc.)
+
 * Extended LiChao
-* Dominator tree
+
 * PrefixSumMultiplicative
-* Polynomial.h is a joke, Polynomial Divison, PolyRoots
-* Try simplex
-* Someone should review strings
-* LyndonFactor is similar to MinRotation
-* Review Angle.h
-* Use DelaunayTriangulation (Slow and Fast)
-
-
-
-* Consult Matrix stuff
-* Better halfplanes
-* Fast polygon cut
-* Point location
-* Sweep around
-* More polynomials
-* 2-SAT functions
-* Better biconnected components
-* Persistent Segment Tree
-* Circle union
-* Yarin Sieve
-* All segments intersections
-* Centroid tree
 * Mobius inverse algo
 * Dirichlet convolution
 * Counting primes
-* Faster linear recurrence
-* Transforms on different bits
-* Polynomial operations (division, inversion, modulo, gcd)
-* Restore MaxClique
-* Trilaterate
-* kth-shortest path
-* NimMultiplication
 
+* Polynomial.h is a joke, Polynomial Divison, PolyRoots
+* Polynomial operations (division, inversion, modulo, gcd)
+* Faster linear recurrence
+
+* Someone should review strings
+
+* Consult Matrix stuff
+
+* Point location
+* Sweep around
+* Online hull
+
+* Persistent Segment Tree
+* Transforms on different bits
+* kth-shortest path
+* Hackenbush
 
 ## Aspirations
 

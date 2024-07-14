@@ -18,16 +18,13 @@ int cyclic_lcs(string s, string t) {
 	rep(i, 0, n * 2) rep(j, 0, m) {
 		dp[i][j] = 0;
 		if(j && dp[i][j - 1] > dp[i][j]) {
-			dp[i][j] = dp[i][j - 1];
-			from[i][j] = 0;
+			dp[i][j] = dp[i][j - 1]; from[i][j] = 0;
 		}
-		if(i && j && eq(i, j) && dp[i - 1][j - 1] + 1 > dp[i][j]) {
-			dp[i][j] = dp[i - 1][j - 1] + 1;
-			from[i][j] = 1;
+		if(i && j && eq(i, j) && dp[i-1][j-1] + 1 > dp[i][j]) {
+			dp[i][j] = dp[i - 1][j - 1] + 1; from[i][j] = 1;
 		}
 		if(i && dp[i - 1][j] > dp[i][j]) {
-			dp[i][j] = dp[i - 1][j];
-			from[i][j] = 2;
+			dp[i][j] = dp[i - 1][j]; from[i][j] = 2;
 		}
 	}
 	int ret = 0;
