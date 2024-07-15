@@ -11,10 +11,6 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 
 * Update contest catalog (hash to template, better compilation, mem usage counting etc.)
 * Extended LiChao
-* PrefixSumMultiplicative
-* Mobius inverse algo
-* Dirichlet convolution
-* Counting primes
 * Polynomial.h is a joke, Polynomial Divison, PolyRoots
 * Polynomial operations (division, inversion, modulo, gcd)
 * Transforms on different bits
@@ -25,7 +21,9 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 * Online hull
 * Persistent Segment Tree
 * kth-shortest path
-* Hackenbush
+* RBHackenbush
+* LinearModMin
+* PrefixSumMultiplicative / Dirichlet Convolution / Counting primes
 
 ## Aspirations
 
