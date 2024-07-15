@@ -2,45 +2,43 @@
  * Author: kobor
  * Date: 2024-07-12
  * License: CC0
- * Description: Finds one of the segments intersections.
+ * Description: Finds one of segments intersections.
  * Time: $O(N \log N)$
  * Status: tested on Timus:1469
  */
 #pragma once
 
 #include "SegmentIntersection.h"
-#include "SegmentXcompare.h"
+#include "directedSegment.h"
 
 template<class P>
-pii allIntersect(vector<pair<P, P>> a) {
-	vector<tuple<P, int, int>> e;
-	FOR(i, 0, SZ(a)) {
-		if(a[i].nd < a[i].st) swap(a[i].st, a[i].nd);
-		e.pb({a[i].st, 0, i}), e.pb({a[i].nd, 1, i});
+pii segmentsIntersect(vector<pair<P, P>> segments) {
+	vector<tuple<P, int, int>> eve; // {point, event_type, id}
+	vector<dirSeg<P>> segs;
+	for(auto &[s, e]: segments) {
+		dirSeg<P> seg(s, e);
+		eve.pb({seg.s,0,SZ(segs)}), eve.pb({seg.e,1,SZ(segs)});
+		segs.pb(seg);
 	}
-	sort(all(e));
-	auto cmp = [](auto bb, auto cc) {
-		auto [bs, be] = bb.st; auto [cs, ce] = cc.st;
-		return segXcompare(bs, be, cs, ce);
+	sort(all(eve));
+	auto inter = [](auto a, auto b) {
+		return SZ(segInter(a->st.s, a->st.e, b->st.s, b->st.e));
 	};
-	auto inter = [](auto bb, auto cc) {
-		return segInter(bb.st, bb.nd, cc.st, cc.nd);
+	auto cmp = [](auto a, auto b) {
+		return mp(a.st.cmp(b.st), a.nd) < mp(0, b.nd);
 	};
-	set<pair<pair<P, P>, int>, decltype(cmp)> s(cmp);
-	for(auto &[_, tp, id]: e) {
-		auto akt = a[id];
-		if(!tp) {
-			auto it = s.lower_bound({akt, id});
-			if(it != end(s) && SZ(inter(it->st, akt)))
-				return {it->nd, id};
-			if(it != begin(s) && SZ(inter((*--it).st, akt)))
-				return {it->nd, id};
-			s.insert({akt, id});
+	set<pair<dirSeg<P>, int>, decltype(cmp)> s(cmp);
+	for(auto &[_, eve_tp, id]: eve) {
+		if(eve_tp == 0) {	// add segment
+			auto it = s.insert({segs[id], id}).st;
+			if(next(it) != s.end() && inter(it, next(it)))
+				return {it->nd, next(it)->nd};
+			if(it != s.begin() && inter(it, prev(it)))
+				return {it->nd, prev(it)->nd};
 		}
-		else {
-			auto it = s.erase(s.find({akt, id}));
-			if(it != begin(s) && it != end(s) &&
-				SZ(inter(it->st, prev(it)->st)))
+		if(eve_tp == 1) {	// del segment
+			auto it = s.erase(s.find({segs[id], id}));
+			if(it!=s.begin() && it!=s.end() && inter(it, prev(it)))
 				return {it->nd, prev(it)->nd};
 		}
 	}

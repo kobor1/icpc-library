@@ -31,7 +31,7 @@ pair<vi,vi> pointLoc(vector<vector<P>> polys, vector<P> pts) {
 	for(auto &[_, eve_tp, id]: eve) {
 		if(eve_tp == 1) {	// point query
 			P p = pts[id];
-			auto it = s.lower_bound(mp(dirSeg(p, p), 0));
+			auto it = s.lower_bound({dirSeg(p, p), 0});
 			if(it != s.begin()) {	// on vertical segment?
 				auto prv = prev(it);
 				if(!sgn(p.cross(prv->st.s, prv->st.e))) it--;

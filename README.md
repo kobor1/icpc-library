@@ -10,28 +10,20 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 ## TODO
 
 * Update contest catalog (hash to template, better compilation, mem usage counting etc.)
-
 * Extended LiChao
-
 * PrefixSumMultiplicative
 * Mobius inverse algo
 * Dirichlet convolution
 * Counting primes
-
 * Polynomial.h is a joke, Polynomial Divison, PolyRoots
 * Polynomial operations (division, inversion, modulo, gcd)
+* Transforms on different bits
 * Faster linear recurrence
-
 * Someone should review strings
-
 * Consult Matrix stuff
-
-* Point location
 * Sweep around
 * Online hull
-
 * Persistent Segment Tree
-* Transforms on different bits
 * kth-shortest path
 * Hackenbush
 
