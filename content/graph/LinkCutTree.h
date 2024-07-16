@@ -5,8 +5,7 @@
  * Description: One-indexed. Represents a forest of unrooted trees.
  *  You can add and remove edges (as long as the result is still a forest),
  *  and check whether two nodes are in the same tree. Also you can update a value in a vertex,
- *  and do standard path and subtree queries. Operation on subtrees must be inversible.
- *  For even bigger hammer have a look at TopTree.
+ *  and do standard path and subtree queries. Operation on subtrees must be invertible.
  * Time: All operations take amortized O(\log N).
  * Status: tested on few tasks
  */

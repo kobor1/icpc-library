@@ -3,6 +3,7 @@
  * Date: 2024-07-12
  * License: CC0
  * Description: Finds one of segments intersections.
+ *	You should change dirSeg's comparator, to compare segments at their left end.
  * Time: $O(N \log N)$
  * Status: tested on Timus:1469
  */

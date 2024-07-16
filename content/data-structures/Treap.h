@@ -30,7 +30,7 @@ struct Treap {
 
 	int apply(int v, bool flip, int add) {
 		if(!v) return 0;
-		// t.pb(t[v]); v = SZ(t) - 1; 			// <- persistency
+		// t.pb(t[v]), v = SZ(t) - 1; 			// <- persistency
 		if(flip) t[v].flip ^= 1, swap(t[v].ch[0], t[v].ch[1]);
 		t[v].val += add; t[v].mn += add;
 		t[v].sum += add * t[v].size;

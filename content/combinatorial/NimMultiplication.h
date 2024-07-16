@@ -2,7 +2,7 @@
  * Author: Anadi
  * Date: 2024-03-21
  * Source: https://github.com/Anadi01/icpc-library/blob/main/lib/math/NimMultiplication.cpp
- * Description: Nimber multiplication. To optimize use $(a ^ b) * c = a * c ^ b * c$.
+ * Description: Nimber multiplication. To optimize use $(a \oplus b) * c = a * c \oplus b * c$.
  * Time: O((\log N)^{1.58})
  * Status: unknown
  */

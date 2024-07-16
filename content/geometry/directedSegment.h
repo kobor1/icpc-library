@@ -5,6 +5,7 @@
  * Source: own work
  * Description: Segment representation usefull for sweeping.
  * 	Compares two disjoint (can touch) segments on sweep line (OY projection).
+ * 	Transitivity breaks if three segments touch in one point, fix it when needed.
  * Status: tested on a few tasks
  */
 #pragma once

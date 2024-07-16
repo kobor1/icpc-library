@@ -40,12 +40,12 @@ void ntt(vll &a) {
 }
 vll conv(const vll &a, const vll &b) {
 	if(a.empty() || b.empty()) return {};
-	int s = SZ(a) + SZ(b) - 1, B = 32 - __builtin_clz(s), n = 1 << B;
-	int inv = modpow(n, mod - 2);
+	int s = SZ(a) + SZ(b) - 1, B = 32 - __builtin_clz(s);
+	int n = 1 << B, inv = modpow(n, mod - 2);
 	vll L(a), R(b), out(n);
 	L.resize(n), R.resize(n);
 	ntt(L), ntt(R);
-	FOR(i,0,n) out[-i & (n - 1)] = (ll)L[i] * R[i] % mod * inv % mod;
+	FOR(i,0,n) out[-i & (n-1)] = (ll)L[i]*R[i] %mod * inv %mod;
 	ntt(out);
 	return {out.begin(), out.begin() + s};
 }
