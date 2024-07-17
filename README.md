@@ -15,13 +15,9 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 * Polynomial operations (division, inversion, modulo, gcd)
 * Transforms on different bits
 * Faster linear recurrence
-* Someone should review strings
-* Consult Matrix stuff
+* Matrix stuff
 * Sweep around
-* Online hull
 * Persistent Segment Tree
-* kth-shortest path
-* RBHackenbush
 * LinearModMin
 * PrefixSumMultiplicative / Dirichlet Convolution / Counting primes
 
