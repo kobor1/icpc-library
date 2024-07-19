@@ -9,17 +9,15 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 
 ## TODO
 
-* Update contest catalog (hash to template, better compilation, mem usage counting etc.)
-* Extended LiChao
-* Polynomial.h is a joke, Polynomial Divison, PolyRoots
-* Polynomial operations (division, inversion, modulo, gcd)
 * Transforms on different bits
-* Faster linear recurrence
 * Matrix stuff
 * Sweep around
 * Persistent Segment Tree
 * LinearModMin
 * PrefixSumMultiplicative / Dirichlet Convolution / Counting primes
+* https://codeforces.com/gym/102978/submission/128898332
+* https://github.com/tonowak/acmlib/blob/master/code/graph/cactus-cycles/main.cpp
+* https://github.com/justiceHui/AlgorithmImplement/blob/master/Math/Fast-Kitamasa.cpp
 
 ## Aspirations
 

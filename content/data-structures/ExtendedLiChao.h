@@ -7,6 +7,7 @@
  * if Line Addition is replaced by Sum Addition.
  * Source: https://codeforces.com/blog/entry/86731
  * Time: $O(\log^2 N)$
+ * Status: unknown
  */
 #pragma once
 
@@ -20,8 +21,7 @@ struct Line {
 };
 
 struct Node {
-	Line<T> line = Line<T>();
-	Line<T> lazy = Line<T>(0, 0);
+	Line<T> line, lazy(0, 0);
 	Node *lc = nullptr, *rc = nullptr;
 	void apply(T l, T r, Line<T> v) { line.add(v); lazy.add(v); }
 };

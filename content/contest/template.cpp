@@ -1,5 +1,11 @@
+/**
+ * Author: kobor
+ * Date: 2024-07-18
+ * Description:
+ * Source: own work
+ */
 #pragma GCC optimize("O3")
-#include "bits/stdc++.h"
+#include "bits/stdc++.h"	/** keep-include */
 using namespace std;
 
 #define rep(i, b, e) for(int i = (b); i <= (e); i++)

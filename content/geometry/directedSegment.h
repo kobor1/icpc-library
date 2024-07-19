@@ -4,8 +4,9 @@
  * License: CC0
  * Source: own work
  * Description: Segment representation usefull for sweeping.
- * 	Compares two disjoint (can touch) segments on sweep line (OY projection).
- * 	Transitivity breaks if three segments touch in one point, fix it when needed.
+ * 	Compares two disjoint (can touch) segments on the sweep line (OY projection).
+ * 	Transitivity breaks if three segments touch in one point and are on different side of the sweep line.
+ * 	Can be easily fixed by comparing mean X coordinates.
  * Status: tested on a few tasks
  */
 #pragma once

@@ -21,7 +21,7 @@
 
 using C = complex<double>;
 using vd = vector<double>;
-void fft(vector<C>& a) {
+void fft(vector<C> &a) {
 	int n = SZ(a), L = 31 - __builtin_clz(n);
 	static vector<complex<long double>> R(2, 1);
 	static vector<C> rt(2, 1);  // (^ 10% faster if double)
@@ -41,7 +41,7 @@ void fft(vector<C>& a) {
 			a[i + j + k] = a[i + j] - z; a[i + j] += z;
 		}
 }
-vd conv(const vd& a, const vd& b) {
+vd conv(const vd &a, const vd &b) {
 	if(a.empty() || b.empty()) return {};
 	vd res(SZ(a) + SZ(b) - 1);
 	int L = 32 - __builtin_clz(SZ(res)), n = 1 << L;
