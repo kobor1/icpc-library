@@ -6,7 +6,7 @@
  * Description: Given two matroids, finds the largest common independent set.
  * 	For the color and graph matroids, this would be the largest forest where no
  *	two edges are the same color. Pass the matroid with more expensive operations to M1.
- * Time: ~O(N^3), in practice ~O(N^2) oracle calls 
+ * Time: \tilde O(N^3), in practice \tilde O(N^2) oracle calls 
  * Status: Tested on SWERC 2011D, Pick Your Own Nim
  */
 #pragma once

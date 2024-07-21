@@ -4,7 +4,6 @@
  * Description:
  * Source: own work
  */
-#pragma GCC optimize("O3")
 #include "bits/stdc++.h"	/** keep-include */
 using namespace std;
 

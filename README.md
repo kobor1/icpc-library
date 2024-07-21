@@ -9,15 +9,8 @@ See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./
 
 ## TODO
 
-* Transforms on different bits
-* Matrix stuff
-* Sweep around
 * Persistent Segment Tree
-* LinearModMin
-* PrefixSumMultiplicative / Dirichlet Convolution / Counting primes
-* https://codeforces.com/gym/102978/submission/128898332
-* https://github.com/tonowak/acmlib/blob/master/code/graph/cactus-cycles/main.cpp
-* https://github.com/justiceHui/AlgorithmImplement/blob/master/Math/Fast-Kitamasa.cpp
+* PrefixSumMultiplicative / Dirichlet Convolution
 
 ## Aspirations
 

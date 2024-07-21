@@ -4,8 +4,8 @@
  * License: CC0
  * Source: https://github.com/justiceHui/AlgorithmImplement/blob/master/Math/Fast-Kitamasa.cpp
  * Description: Basic polynomial subroutines. Inputs must be in [0, mod).
- * 	Operator \% works \~1s for $N = 5 \cdot 10^5$ (using NTT).
- * 	NTT is rather slow, FFTmod works \~2x faster.
+ * 	Operator \% works \tilde 1s for $N = 5 \cdot 10^5$ (using NTT).
+ * 	NTT is rather slow, FFTmod works \tilde 2x faster.
  * Time: O(N \log N)
  * Status: tested on yosupo
  */

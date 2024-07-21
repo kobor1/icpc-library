@@ -11,15 +11,13 @@
 
 struct CentroidTree {		// 0-indexed
 	vector<vector<pii>> G;	// {neighbour, distance}
-	constexpr int LOG = 20; vector<ll> dist[LOG];
+	vector<ll> dist[LOG];
 	vi sz, block, par, dpth;
-
 	CentroidTree(vector<vector<pii>> &_G) : G(_G) {
 		int n = SZ(G); sz = block = par = dpth = vi(n);
 		FOR(i, 0, LOG) dist[i].resize(n);
 		decomp(0, -1);
 	}
-
 	void sz_dfs(int v, int p) {
 		sz[v] = 1;
 		for(auto &[u, _]: G[v]) 
