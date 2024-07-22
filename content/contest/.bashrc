@@ -3,9 +3,9 @@ c() {
 	g++ -std=gnu++20 -Wall -Wextra -Wshadow \
 	-fsanitize=address,undefined -ggdb3 -DLOCAL $1.cpp -o $1
 }
-# Quick compilation, close to judge's one (w/o -g and -static)
+# Quick compilation, close to judge's one (w/o -static)
 f() {
-	g++ -std=gnu++20 -O2 -DLOCAL $1.cpp -o $1
+	g++ -std=gnu++20 -O2 -g $1.cpp -o $1
 }
 # Hashes a file, ignoring all whitespace and comments
 # Use for verifying that code was correctly typed

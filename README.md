@@ -7,11 +7,6 @@ It consists of 25 pages of copy-pasteable C++ code, for use in ICPC-style progra
 
 See [kactl.pdf](./kactl.pdf) for the final, browsable version, and [content/](./content/) for raw source code.
 
-## TODO
-
-* Persistent Segment Tree
-* PrefixSumMultiplicative / Dirichlet Convolution
-
 ## Aspirations
 
 KACTL algorithms should be: useful, short, fast enough, well tested, and if relevant, readable and easy to modify.

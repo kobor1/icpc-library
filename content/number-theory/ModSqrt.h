@@ -9,8 +9,6 @@
  */
 #pragma once
 
-#include "ModPow.h"
-
 ll sqrt(ll a, ll p) {
 	a %= p; if(a < 0) a += p;
 	if(a == 0) return 0;

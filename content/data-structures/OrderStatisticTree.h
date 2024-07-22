@@ -4,8 +4,9 @@
  * License: CC0
  * Source: hacKIT, NWERC 2015
  * Description: A set (not multiset!) with support for finding the n'th
- * element, and finding the index of an element.
- * To get a map, change \texttt{null\_type}.
+ * 	element, and finding the index of an element.
+ * 	To get a map, change \texttt{null\_type}.
+ * 	For PBDS $swap(a, b)$ works in $O(N)$, use $a.swap(b)$ instead!
  * Time: O(\log N), join probably O(N)
  */
 #pragma once
