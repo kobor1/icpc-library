@@ -9,6 +9,33 @@
 		 If $f(n)$ counts ``configurations'' (of some sort) of length $n$, we can ignore rotational symmetry using $G = \mathbb Z_n$ to get
 		 \[ g(n) = \frac 1 n \sum_{k=0}^{n-1}{f(\text{gcd}(n, k))} = \frac 1 n \sum_{k|n}{f(k)\phi(n/k)}. \]
 
+	\subsection{Young diagram}
+		Given a partition $\lambda$, the Young diagram $Y(\lambda)$ is the set of pairs $(i, j)$ of positive integers s.t. $i \leq |\lambda|$ and $j \leq \lambda_i$.
+		Such pairs are called the squares of the diagram.
+		
+		A normalised Young tableau $P$ of size $n$ is a pair $(\lambda, p)$, where $p$ is a permutation indexed by $Y(\lambda)$ s.t. $p_{i, j} < \min(p_{i + 1, j}, p_{i, j + 1})$.
+
+		There is a bijection $f$ from permutations $\pi$ of length $n$ to pairs $(P, Q) = ((\lambda, p), (\lambda, q))$ of Young tableaus of size $n$, which share the same partition.
+		
+		This mapping (which can be computed by RSK) has the following properties:
+		\begin{itemize}
+			\item $\sum_{i \leq m} \lambda_i$ is the maximum total size of $m$ disjoint \textbf{increasing} subsequences of the permutation
+			\item $\sum_{j \leq m} \lambda_j^T$ is the maximum total size of $m$ disjoint \textbf{decreasing} subsequences of the permutation
+			\item $f(\pi^{-1}) = (Q, P)$
+			\item $f(rev(\pi)) = (P^T, Sch(Q))$ -- $Sch$ is the normalised result of the Schützenberger involution
+		\end{itemize}
+
+		If $c(\lambda)$ is the number of valid $p$ for the partition $\lambda$, then $n! = \sum_{\lambda \in P_n} c(\lambda)^2$. \\
+		The number of permutations s.t. $\pi = \pi^{-1}$ is $\sum_{\lambda \in P_n} c(\lambda)$.
+
+	\subsection{Hook-length formula}
+		For $\lambda \in P_n$ and $(i, j) \in Y(\lambda)$, define $h_{\lambda}(i, j)$ as the number of squares in the diagram directly below or to the right of square $(i, j)$: $h_{\lambda}(i, j) = (\lambda^T_j - i) + (\lambda_i - j) + 1$.
+		
+		The hook-length theorem states that:
+		\small
+		\[ c(\lambda) = \frac{n!}{\prod_{(i, j) \in Y(\lambda)} h_\lambda(i, j)} \]
+		\normalsize
+
 \section{General purpose numbers}
 	\subsection{Bernoulli numbers}
 		EGF of Bernoulli numbers is $B(t)=\frac{t}{e^t-1}$ (FFT-able).
@@ -56,6 +83,9 @@
 		\# on $k$ existing trees of size $n_i$: $n_1n_2\cdots n_k n^{k-2}$ \\
 		\# with degrees $d_i$: $(n-2)! / ((d_1-1)! \cdots (d_n-1)!)$
 
+\kactlimport{RSK.h}
+\kactlimport{RSKinverse.h}
+\kactlimport{RSKrecover.h}
 \kactlimport{MatroidIntersection.h}
 \kactlimport{MatroidOracles.h}
 \kactlimport{NimMultiplication.h}
