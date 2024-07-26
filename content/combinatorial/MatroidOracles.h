@@ -12,10 +12,10 @@
 #pragma once
 
 struct ColorMat {
-	vi clr, bound, cnt; int max_bound, offset = 0;
+	vi clr, bound, cnt; int max_bound = 0, offset = 0;
 	ColorMat(vi _clr, vi _bound) : clr(_clr), bound(_bound) {
 		cnt.resize(SZ(bound));
-		max_bound = *max_element(all(bound));
+		if(SZ(bound)) max_bound = *max_element(all(bound));
 	}
 	void fix(int x) { cnt[clr[x]] = max(cnt[clr[x]], offset); }
 	bool check(int x) {
@@ -28,7 +28,7 @@ struct ColorMat {
 struct GraphicMat {	// use normal UF to reduce memory
 	vector<pii> edg; UF uf; vi vis;
 	GraphicMat(vector<pii> _edg) : edg(_edg), uf(0) {
-		int max_n = 0;
+		int max_n = -1;
 		for(auto &[x, y]: edg) max_n = max({max_n, x, y});
 		uf = UF(max_n + 1);
 	}
