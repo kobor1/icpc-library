@@ -14,11 +14,11 @@
 #include "Point.h"
 
 template<class P>
-struct DynHull {
+struct DynHull {	// needs ~M^3 !
 	struct Node { int bl, br, l, r, lc, rc; };
 	vector<Node> t = {{-1, -1, -1, -1, 0, 0}};
 	vector<P> p; int root; vi mapp, remapp;
-	DynHull(vector<P> _p, bool lower = 1) : p(_p) {
+	DynHull(vector<P> _p, bool lower = 0) : p(_p) {
 		vector<pair<P, int>> pts;
 		FOR(i, 0, SZ(p)) pts.pb({(lower ? P() - p[i] : p[i]), i});
 		sort(all(pts)); mapp = remapp = vi(SZ(pts));
@@ -73,6 +73,6 @@ struct DynHull {
 	void erase(int pos) { root = erase(root, mapp[pos]); }
 	vi hull() {
 		vi res; hull(root, res); for(auto &x: res) x = remapp[x];
-		reverse(all(res)); return res;
+		return res;
 	}
 };
