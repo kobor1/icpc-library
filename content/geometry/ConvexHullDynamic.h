@@ -1,78 +1,86 @@
 /**
  * Author: kobor
- * Date: 2024-07-27
+ * Date: 2024-07-30
  * License: CC0
- * Source: bicsi's submit
+ * Source: https://judge.yosupo.jp/submission/201103
  * Description: Dynamic convex hull, can be used for computing onion layers.
- *  Insertions also can be implemented, but should be known in advance.
+ *  All points should be known in advance.
  * 	Points on the edges are included in the hull.
- * Time: O(\log^2 n)
+ * 	Return indices are the same as in the input.
+ * Time: O(\log^2 n), as fast as other O(\log n) hulls
  * Status: tested on yosupo
  */
 #pragma once
 
 #include "Point.h"
 
-template<class P>
-struct DynHull {	// needs ~M^3 !
-	struct Node { int bl, br, l, r, lc, rc; };
-	vector<Node> t = {{-1, -1, -1, -1, 0, 0}};
-	vector<P> p; int root; vi mapp, remapp;
-	DynHull(vector<P> _p, bool lower = 0) : p(_p) {
+template<class T>
+struct DynHull {
+	using P = Point<T>;
+	struct Node { int l, r; }; vector<P> ps;
+	int n; vi in, id; int s; vector<Node> t; vector<T> m;
+	DynHull(vector<P> _ps, bool lower = 0, int start = -1)
+		 : ps(_ps), n(SZ(ps)), in(n), id(n) {
+		if(start == -1) start = n;
+		s = 1; while(s < n) s *= 2;
+		t.resize(s * 2, {-1, -1}); m.resize(s);
 		vector<pair<P, int>> pts;
-		FOR(i, 0, SZ(p)) pts.pb({(lower ? P() - p[i] : p[i]), i});
-		sort(all(pts)); mapp = remapp = vi(SZ(pts));
-		FOR(i, 0, SZ(p)) {
-			tie(p[i], remapp[i]) = pts[i], mapp[remapp[i]] = i;
+		FOR(i, 0, n) pts.pb({ps[i] * (lower ? -1 : 1), i});
+		sort(all(pts));
+		FOR(i, 0, n) {
+			tie(ps[i], id[i]) = pts[i]; in[id[i]] = i;
+			int p = i + s; while((p & 1) ^ 1) p >>= 1;
+			m[p >> 1] = ps[i].x;
 		}
-		root = build(0, SZ(p) - 1);
+		FOR(i, 0, start) t[s + in[i]] = {in[i], in[i]};
+		per(i, 1, s - 1) pull(i);
 	}
-	bool leaf(int x) { return t[x].l == t[x].r; }
-	int combine(int lc, int rc, int ret = -1) {
-		if(!lc || !rc) return lc + rc;
-		if(ret == -1 || ret == lc || ret == rc) {
-			ret = SZ(t), t.pb({}); }
-		t[ret] = {-1, -1, t[lc].l, t[rc].r, lc, rc};
-		while(!leaf(lc) || !leaf(rc)) {
-			int a = t[lc].bl, b = t[lc].br;
-			int c = t[rc].bl, d = t[rc].br;
-			if(a != b && p[a].cross(p[b], p[c]) > 0) lc = t[lc].lc;
-			else if(c != d && p[b].cross(p[c], p[d]) > 0) {
-				rc = t[rc].rc; }
-	  		else if(a == b) rc = t[rc].lc;
-			else if(c == d) lc = t[lc].rc;
-			else {
-				auto s1 = p[a].cross(p[b], p[c]);
-				auto s2 = p[a].cross(p[b], p[d]);
-				assert(s1 >= s2);
-				auto xc = p[c].x, xd = p[d].x, xm = p[t[rc].l].x;
-				if(s1 == s2 || s1 * xd - s2 * xc < (s1 - s2) * xm) {
-					lc = t[lc].rc; }
-				else rc = t[rc].lc;
+	int go(int v) { 
+		while(t[v].l < 0) v = v * 2 + t[v].l + 3;
+		return v;
+	}
+	void pull(int v) {
+		auto crossNegX = [](P a, P b, P c, P d, T x) {
+			// change __int128 if using doubles!
+			__int128 p = a.cross(b, c), q = b.cross(a, d);
+			return p + q == 0 || (d.x - x) * p + (c.x - x) * q <= 0;
+		};
+		int p = v * 2, q = p + 1;
+		if(t[p].l == -1 && t[q].l == -1) t[v] = {-1, -1};
+		else if(t[p].l == -1) t[v] = {-2, -2};
+		else if(t[q].l == -1) t[v] = {-3, -3};
+		else {
+			p = go(p), q = go(q);
+			while(p < s || q < s) {
+				auto [a, b] = t[p]; auto [c, d] = t[q];
+				if(a != b && ps[a].cross(ps[b], ps[c]) > 0) {
+					p = go(p * 2); }
+				else if(c != d && ps[b].cross(ps[c], ps[d]) > 0) {
+					q = go(q * 2 + 1); }
+				else if(a == b) q = go(q * 2);
+				else if(c == d ||
+					crossNegX(ps[a], ps[b], ps[c], ps[d], m[v])) {
+					p = go(p * 2 + 1); }
+				else q = go(q * 2);
 			}
+			t[v] = {p - s, q - s};
 		}
-		t[ret].bl = t[lc].l; t[ret].br = t[rc].l;
-		return ret;
 	}
-	int build(int l, int r) {
-		if(l == r) { t.pb({l, l, l, l, 0, 0}); return SZ(t) - 1; }
-		int mid = (l + r) / 2;
-		return combine(build(l, mid), build(mid + 1, r));
+	void add(int i) {
+		i = in[i]; int v = i + s; t[v] = {i, i};
+		while(v >>= 1) pull(v);
 	}
-	int erase(int v, int pos) {
-		if(!v || t[v].r < pos || t[v].l > pos) return v;
-		return leaf(v) ? 0 :
-			combine(erase(t[v].lc, pos), erase(t[v].rc, pos), v);
+	void del(int i) {
+		i = in[i]; int v = i + s; t[v] = {-1, -1};
+		while(v >>= 1) {
+			if(t[v].l < 0 || t[v].l == i || t[v].r == i) pull(v); }
 	}
-	void hull(int v, vi &res, int l = 0, int r = 1e9) {
-		if(!v || l > r) return;
-		if(leaf(v)) return res.pb(t[v].l);
-		hull(t[v].lc, res, l, min(r, t[v].bl));
-		hull(t[v].rc, res, max(l, t[v].br), r);
+	void dfs(int v, int l, int r, vi &h) {
+		if(v >= s) return h.pb(id[t[v].l]);
+		if(l <= t[v].l) dfs(go(v * 2), l, min(t[v].l, r), h);
+		if(t[v].r <= r) dfs(go(v * 2 + 1), max(t[v].r, l), r,  h);
 	}
-	void erase(int pos) { root = erase(root, mapp[pos]); }
-	vi hull() {
-		vi res; hull(root, res); for(auto &x: res) x = remapp[x];
-		return res;
+	vi hull() { 
+		vi h; if(~t[1].l) dfs(go(1), 0, n - 1, h); return h;
 	}
 };
