@@ -1,6 +1,6 @@
 /**
- * Author: Benjamin Qi, Oleksandr Kulkov, chilli
- * Date: 2020-01-12
+ * Author: kobor, Benjamin Qi, Oleksandr Kulkov, chilli
+ * Date: 2024-08-23
  * License: CC0
  * Source: https://codeforces.com/blog/entry/53170, https://github.com/bqi343/USACO/blob/master/Implementations/content/graphs%20(12)/Trees%20(10)/HLD%20(10.3).h
  * Description: Decomposes a tree into vertex disjoint heavy paths and light
@@ -15,7 +15,7 @@
  */
 #pragma once
 
-struct HLD {
+struct HLD {	// 0-indexed
 	int N, tim = 0, VALS_EDGES = 0;	// change to 1 if needed
 	vector<vi> adj; vi par, sz, depth, rt, pos;
 	HLD(vector<vi> _adj) : N(SZ(_adj)), adj(_adj), par(N, -1),

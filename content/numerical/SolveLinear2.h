@@ -10,7 +10,7 @@
 
 #include "SolveLinear.h"
 
-FOR(j ,0, n) if(j != i) // instead of FOR(j, i+1, n)
+FOR(j, 0, n) if(j != i) // instead of FOR(j, i+1, n)
 // ... then at the end:
 x.assign(m, undefined);
 FOR(i, 0, rank) {

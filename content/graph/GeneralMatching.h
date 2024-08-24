@@ -10,7 +10,7 @@
  */
 #pragma once
 
-struct MaxMatching {    // 1-indexed
+struct MaxMatching {	// 1-indexed
 	vector<vi> G; int n;
 	vi mate, par, white; vector<pii> l;
 	MaxMatching(vector<vi> _G) : G(_G), n(SZ(G)), mate(n),

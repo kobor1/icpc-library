@@ -11,12 +11,11 @@
 
 struct Treap {
 	struct Node {
-		int ch[2] = {0, 0}; 
-		int rank = rand(), size = 0;
-		int val = 0, mn = 1e9, sum = 0;	// Subtree aggregates
-		bool flip = 0; int add = 0;		// Lazy tags
+		int ch[2] = {0, 0}, size = 0;
+		int val = 0, mini = 1e9, sum = 0;	// Subtree aggregates
+		bool flip = 0; int add = 0;			// Lazy tags
 		Node() {}
-		Node(int v) : size(1), val(v), mn(v), sum(v) {}
+		Node(int v) : size(1), val(v), mini(v), sum(v) {}
 	};
 	vector<Node> t;
 	Treap() : t(1) {}
@@ -24,7 +23,7 @@ struct Treap {
 	void pull(int v) {
 		auto [l, r] = t[v].ch;
 		t[v].size = t[l].size + 1 + t[r].size;
-		t[v].mn = min({t[l].mn, t[v].val, t[r].mn});
+		t[v].mini = min({t[l].mini, t[v].val, t[r].mini});
 		t[v].sum = t[l].sum + t[v].val + t[r].sum;
 	}
 
@@ -32,17 +31,21 @@ struct Treap {
 		if(!v) return 0;
 		// t.pb(t[v]), v = SZ(t) - 1; 			// <- persistency
 		if(flip) t[v].flip ^= 1, swap(t[v].ch[0], t[v].ch[1]);
-		t[v].val += add; t[v].mn += add;
+		t[v].val += add; t[v].mini += add;
 		t[v].sum += add * t[v].size;
 		t[v].add += add;
 		return v;
 	}
 
 	void push(int v) {
-		FOR(i, 0, 2) {
+		FOR(i, 0, 2)
 			t[v].ch[i] = apply(t[v].ch[i], t[v].flip, t[v].add);
-		}
-		t[v].flip = 0; t[v].add = 0;
+		t[v].add = t[v].flip = 0;
+	}
+
+	int rank(int v, int u) {
+		static mt19937 gen(2137);
+		return int(gen() % (t[v].size + t[u].size)) < t[v].size;
 	}
 
 	pii split(int v, int k) {
@@ -66,7 +69,7 @@ struct Treap {
 	int merge(int v, int u) {
 		if(!v || !u) return v ^ u;
 		push(v), push(u);
-		if(t[v].rank > t[u].rank) {
+		if(rank(v, u)) {
 			t[v].ch[1] = merge(t[v].ch[1], u);
 			return pull(v), v;
 		}
@@ -106,15 +109,15 @@ struct Treap {
 		auto [p, q] = split(v, l);
 		auto [u, s] = split(q, r - l + 1);
 		// auto [u, s] = split(q, r + 1);		// <- by values
-		int mn = t[u].mn, sum = t[u].sum;
+		int mini = t[u].mini, sum = t[u].sum;
 		v = merge(merge(p, u), s);
-		return {mn, sum};
+		return {mini, sum};
 	}
 
 	// only when by values
 	int join(int v, int u) {
 		if(!v || !u) return v ^ u;
-		if(t[v].rank < t[u].rank) swap(v, u);
+		if(!rank(v, u)) swap(v, u);
 		auto [p, q] = split(u, t[v].val);
 		push(v);
 		t[v].ch[0] = join(t[v].ch[0], p);

@@ -2,7 +2,7 @@
  * Author: Anadi / Bohun ?
  * Date: 2024-03-20
  * Source: https://github.com/Anadi01/icpc-library/blob/main/lib/text/eertree.cpp
- * Description: TODO
+ * Description: Famous Bohun's Eertree
  * Status: unknown
  */
 #pragma once

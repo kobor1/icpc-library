@@ -8,15 +8,15 @@
  */
 #pragma once
 
-const __int128 C = 311;
+const __int128 C = 2137;
 const ll mod = ll(1e18) + 31;
 
 struct Hasher {
 	vector<ll> ha, pw;
-	Hasher(string &str) : ha(SZ(str)+1), pw(SZ(str)+1, 1) {
-		FOR(i, 0, SZ(str)) {
-			ha[i+1] = (ha[i] * C + str[i]) % mod;
-			pw[i+1] = pw[i] * C % mod;
+	Hasher(string &s) : ha(SZ(s) + 1), pw(SZ(s) + 1, 1) {
+		FOR(i, 0, SZ(s)) {
+			ha[i + 1] = (ha[i] * C + 1 + s[i]) % mod;
+			pw[i + 1] = pw[i] * C % mod;
 		}
 	}
 	ll hashInterval(int a, int b) { // hash [a, b]
@@ -24,9 +24,3 @@ struct Hasher {
 		return res < 0 ? res + mod : res;
 	}
 };
-
-ll hashString(string &s) {
-	ll h = 0;
-	for(char c: s) h = (h * C + c) % mod;
-	return h;
-}
