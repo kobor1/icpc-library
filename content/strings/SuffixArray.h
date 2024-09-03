@@ -27,6 +27,7 @@ bool dif(int a, int b, int k) {
 void build() {
 	x.clear(); x.resize(max(A, n) + 2); y = x; // +2 enough?
 	int j = 0;
+	rep(i, 0, A) cnt[i] = 0;
 	rep(i, 1, n) cnt[x[i] = s[i]]++;
 	rep(i, 1, A) cnt[i] += cnt[i - 1];
 	per(i, 1, n) sa[cnt[x[i]]--] = i;    
