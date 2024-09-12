@@ -33,7 +33,7 @@ struct MCMF {
 
 	void path(int s) {
 		fill(all(seen), 0); fill(all(dist), INF);
-		dist[s] = 0; ll di;
+		fill(all(par), NULL); dist[s] = 0; ll di;
 		__gnu_pbds::priority_queue<pair<ll, int>> q;
 		vector<decltype(q)::point_iterator> its(N);
 		q.push({0, s});

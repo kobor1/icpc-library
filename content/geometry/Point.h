@@ -36,5 +36,5 @@ struct Point {
 	P rotate(D a) const {
 		return P(x*cos(a)-y*sin(a),x*sin(a)+y*cos(a)); }
 	friend ostream& operator<<(ostream& os, P p) {
-		return os << "(" << p.x << ", " << p.y << ")"; }
+		return os << mp(p.x, p.y); }
 };
