@@ -19,14 +19,12 @@ struct Treap {
 	};
 	vector<Node> t;
 	Treap() : t(1) {}
-
 	void pull(int v) {
 		auto [l, r] = t[v].ch;
 		t[v].size = t[l].size + 1 + t[r].size;
 		t[v].mini = min({t[l].mini, t[v].val, t[r].mini});
 		t[v].sum = t[l].sum + t[v].val + t[r].sum;
 	}
-
 	int apply(int v, bool flip, int add) {
 		if(!v) return 0;
 		// t.pb(t[v]), v = SZ(t) - 1; 			// <- persistency
@@ -36,18 +34,15 @@ struct Treap {
 		t[v].add += add;
 		return v;
 	}
-
 	void push(int v) {
 		FOR(i, 0, 2)
 			t[v].ch[i] = apply(t[v].ch[i], t[v].flip, t[v].add);
 		t[v].add = t[v].flip = 0;
 	}
-
 	int rank(int v, int u) {
 		static mt19937 gen(2137);
 		return int(gen() % (t[v].size + t[u].size)) < t[v].size;
 	}
-
 	pii split(int v, int k) {
 		if(!v) return {0, 0};
 		push(v);
@@ -65,7 +60,6 @@ struct Treap {
 			return {v, q};
 		}
 	}
-
 	int merge(int v, int u) {
 		if(!v || !u) return v ^ u;
 		push(v), push(u);
@@ -78,7 +72,6 @@ struct Treap {
 			return pull(u), u;
 		}
 	}
-
 	void insert(int &v, int pos, int val) {
 		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, pos);
@@ -86,7 +79,6 @@ struct Treap {
 		// t.pb(Node(pos)); int u = SZ(t) - 1;	// <- by values
 		v = merge(merge(p, u), q);
 	}
-
 	void erase(int &v, int l, int r) {
 		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
@@ -94,7 +86,6 @@ struct Treap {
 		// auto [u, s] = split(q, r + 1);		// <- by values
 		v = merge(p, s);
 	}
-
 	void modify(int &v, int l, int r, bool flip, int add) {
 		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
@@ -103,7 +94,6 @@ struct Treap {
 		u = apply(u, flip, add);
 		v = merge(merge(p, u), s);
 	}
-
 	pii get(int &v, int l, int r) {
 		// if(v) t.pb(t[v]), v = SZ(t) - 1; 	// <- persistency
 		auto [p, q] = split(v, l);
@@ -113,7 +103,6 @@ struct Treap {
 		v = merge(merge(p, u), s);
 		return {mini, sum};
 	}
-
 	// only when by values
 	int join(int v, int u) {
 		if(!v || !u) return v ^ u;
@@ -124,7 +113,6 @@ struct Treap {
 		t[v].ch[1] = join(t[v].ch[1], q);
 		return pull(v), v;
 	}
-
 	// only when by values, persistency destroys complexity
 	void increase(int &v, int l, int r, int increase) { 
 		// if(v) t.pb(t[v]), v = SZ(t) - 1;	// <- persistency

@@ -21,7 +21,7 @@ vi mo(vector<pii> Q) {
 #define K(x) pii(x.first/blk, x.second ^ -(x.first/blk & 1))
 	iota(all(s), 0);
 	sort(all(s), [&](int s, int t){ return K(Q[s]) < K(Q[t]); });
-	for (int qi : s) {
+	for(int qi: s) {
 		pii q = Q[qi];
 		while(L > q.st) add(--L, 0);
 		while(R < q.nd) add(R++, 1);
@@ -37,8 +37,7 @@ vi moTree(vector<array<int,2>> Q, vector<vi> &ed, int root=0){
 	vi s(SZ(Q)), res = s, I(N), L(N), R(N), in(N), par(N);
 	add(0, 0), in[0] = 1;
 	auto dfs = [&](int x, int p, int dep, auto& f) -> void {
-		par[x] = p; L[x] = N;
-		if(dep) I[x] = N++;
+		par[x] = p; L[x] = N; if(dep) I[x] = N++;
 		for(int y: ed[x]) if (y != p) f(y, x, !dep, f);
 		if(!dep) I[x] = N++;
 		R[x] = N;

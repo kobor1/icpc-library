@@ -21,7 +21,7 @@ vector<D> polyRoots(Poly p, D xmin, D xmax) {
 		D l = dr[i], h = dr[i+1];
 		bool sign = p(l) > 0;
 		if(sign ^ (p(h) > 0)) {
-			FOR(it,0,60) { // while (h - l > 1e-8)
+			FOR(it, 0, 60) { // while (h - l > 1e-8)
 				D m = (l + h) / 2, f = p(m);
 				if((f <= 0) ^ sign) l = m;
 				else h = m;

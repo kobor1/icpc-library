@@ -12,8 +12,7 @@
 using P = Point3D<D>;
 vector<P> trilaterate(P a, P b, P c, D p, D q, D r) {
 	b = b - a, c = c - a;
-	P e_x = b.unit();
-	D i = e_x.dot(c);
+	P e_x = b.unit(); D i = e_x.dot(c);
 	P e_y = (c - e_x * i).unit(), e_z = e_x.cross(e_y);
 	D d = b.dist(), j = e_y.dot(c);
 	D x = (p * p - q * q + d * d) / 2 / d;

@@ -11,18 +11,15 @@
 #pragma once
 
 // #include <bits/extc++.h> /// include-line, keep-include
-
-const ll INF = numeric_limits<ll>::max() / 4;
+const ll INF = 2e18;
 
 struct MCMF {
 	struct edge {
-		int from, to, rev;
-		ll cap, cost, flow;
+		int from, to, rev; ll cap, cost, flow;
 	};
 	int N;
 	vector<vector<edge>> ed; vi seen;
 	vector<ll> dist, pi; vector<edge*> par;
-
 	MCMF(int N) : N(N), ed(N), seen(N), dist(N), pi(N), par(N) {}
 
 	void addEdge(int from, int to, ll cap, ll cost) {
@@ -66,7 +63,6 @@ struct MCMF {
 		FOR(i,0,N) for(edge &e: ed[i]) totcost += e.cost * e.flow;
 		return {totflow, totcost / 2};
 	}
-
 	// If some costs can be negative, call this before maxflow:
 	void setpi(int s) { // (otherwise, leave this out)
 		fill(all(pi), INF); pi[s] = 0;

@@ -9,8 +9,7 @@ using D = double;
 struct Poly {
 	vector<D> a;
 	D operator()(D x) const {
-		D val = 0;
-		for(int i = SZ(a); i--;) (val *= x) += a[i];
+		D val = 0; for(int i = SZ(a); i--;) (val *= x) += a[i];
 		return val;
 	}
 	void diff() {

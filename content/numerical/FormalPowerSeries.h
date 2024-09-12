@@ -28,12 +28,10 @@ struct Poly {
 		r.insert(r.begin(), 0);
 		return r;
 	}
-	Poly log(int n) {
-		// assert(a[0] == 1);
+	Poly log(int n) { // assert(a[0] == 1);
 		return (trim(n).deriv() * inv(n)).integr().trim(n);
 	}
-	Poly exp(int n) {
-		// assert(a[0] == 0);
+	Poly exp(int n) { // assert(a[0] == 0);
 		Poly q(1);
 		for(int i = 1; i < n; i *= 2) {
 			Poly p = Poly(1) + trim(i * 2) - q.log(i * 2);

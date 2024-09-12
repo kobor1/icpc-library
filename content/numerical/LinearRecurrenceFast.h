@@ -26,10 +26,8 @@ ll linearRecFast(vll a, vll c, ll k) {
 		return Poly(res);
 	};
 	auto modFast = [&](Poly p) { return p - divFast(p) * f; };
-	for(; k; k >>= 1) {
+	for(; k; k >>= 1, xn = modFast(xn * xn))
 		if(k & 1) d = modFast(d * xn);
-		xn = modFast(xn * xn);
-	}
 	ll res = 0;
 	FOR(i, 0, min(SZ(a), SZ(d.a)))
 		res = (res + a[i] * d.a[i]) % mod;

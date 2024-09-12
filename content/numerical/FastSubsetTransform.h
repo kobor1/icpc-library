@@ -20,10 +20,9 @@ void FST(vi &a, bool inv) {
 				// pii(u + v, u - v);                   // XOR /// include-line
 		}
 	}
-	// if (inv) for (int &x: a) x /= SZ(a); // XOR only /// include-line
+	// if(inv) for(int &x: a) x /= SZ(a); // XOR only /// include-line
 }
 vi conv(vi a, vi b) {
-	FST(a, 0); FST(b, 0);
-	FOR(i, 0, SZ(a)) a[i] *= b[i];
+	FST(a, 0); FST(b, 0); FOR(i, 0, SZ(a)) a[i] *= b[i];
 	FST(a, 1); return a;
 }

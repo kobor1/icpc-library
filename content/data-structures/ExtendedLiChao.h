@@ -94,9 +94,7 @@ T Query(Node* &n, T tl, T tr, T x) {
 void InsertLine(T l, T r, Line<T> x) {
 	return InsertLine(root, 0, sz - 1, l, r, x);
 }
-
 void AddLine(T l, T r, Line<T> x) {
 	return AddLine(root, 0, sz - 1, l, r, x);
 }
-
 T Query(T x) { return Query(root, 0, sz - 1, x); }

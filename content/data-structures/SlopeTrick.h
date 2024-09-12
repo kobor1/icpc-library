@@ -29,36 +29,29 @@ struct SlopeTrick {
 	// use only functions below!
 	SlopeTrick() : min_f(0), add_l(0), add_r(0) {}
 	struct Query { ll lx, rx, min_f; };
-	// return min f(x)
-	Query query() const { return Query(top_L(), top_R(), min_f); }
-	// f(x) += a
+	// return 		min f(x)
+	Query query() const { return Query(top_L(),top_R(),min_f); }
+	// 				f(x) += a
 	void add_all(ll a) { min_f += a; }
-	// add \_
-	// f(x) += max(a - x, 0)
+	// add \_		f(x) += max(a - x, 0)
 	void add_a_minus_x(ll a) {
 		min_f += max(0ll, a - top_R()); push_R(a); push_L(pop_R());
 	}
-	// add _/
-	// f(x) += max(x - a, 0)
+	// add _/		f(x) += max(x - a, 0)
 	void add_x_minus_a(ll a) {
 		min_f += max(0ll, top_L() - a); push_L(a); push_R(pop_L());
 	}
-	// add \/
-	// f(x) += abs(x - a)
+	// add \/		f(x) += abs(x - a)
 	void add_abs(ll a) { add_a_minus_x(a); add_x_minus_a(a); }
-	// \/ -> \_
-	// f_{new} (x) = min f(y) (y <= x)
+	// \/ -> \_		f_{new} (x) = min f(y) (y <= x)
 	void clear_right() { while(SZ(R)) R.pop(); }
-	// \/ -> _/
-	// f_{new} (x) = min f(y) (y >= x)
+	// \/ -> _/		f_{new} (x) = min f(y) (y >= x)
 	void clear_left() { while(SZ(L)) L.pop(); }
-	// \/ -> \_/
-	// f_{new} (x) = min f(y) (x-b <= y <= x-a)
+	// \/ -> \_/	f_{new} (x) = min f(y) (x-b <= y <= x-a)
 	void shift(ll a, ll b) {
 		assert(a <= b); add_l += a; add_r += b;
 	}
-	// \/. -> .\/
-	// f_{new} (x) = f(x - a)
+	// \/. -> .\/	f_{new} (x) = f(x - a)
 	void shift(ll a) { shift(a, a); }
 	// L, R is destroyed
 	ll get(ll x) {

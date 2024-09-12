@@ -20,16 +20,12 @@
 struct TwoSat {
 	int n; vector<vi> gr; vi values; // 0 = false, 1 = true
 	TwoSat(int _n = 0) : n(_n), gr(n * 2) {}
-
 	int addVar() { FOR(i, 0, 2) gr.pb({}); return n++; }
-
 	void either(int f, int j) {
 		f = max(2*f, -1-2*f); j = max(2*j, -1-2*j);
 		gr[f].pb(j^1); gr[j].pb(f^1);
 	}
-	
 	void setValue(int x) { either(x, x); }
-
 	void atMostOne(const vi& li) { // (optional)
 		if(SZ(li) <= 1) return;
 		int cur = ~li[0];
@@ -40,7 +36,6 @@ struct TwoSat {
 		}
 		either(cur, ~li[1]);
 	}
-
 	vi val, comp, z; int time = 0;
 	int dfs(int i) {
 		int low = val[i] = ++time, x; z.pb(i);
@@ -52,7 +47,6 @@ struct TwoSat {
 		} while(x != i);
 		return val[i] = low;
 	}
-
 	bool solve() {
 		values.assign(n, -1); val.assign(n * 2, 0); comp = val;
 		FOR(i, 0, n * 2) if(!comp[i]) dfs(i);

@@ -20,24 +20,20 @@ struct SplayTree {
 	};
 	vector<Node> t;
 	SplayTree(int n) : t(n + 1) {}
-	
 	void push(int v) {
 		if(!v || !t[v].flip) return;
 		auto &[l, r] = t[v].ch;
 		t[l].flip ^= 1, t[r].flip ^= 1;
 		swap(l, r), t[v].flip = 0;
 	}
-
 	void pull(int v) {
 		auto [l, r] = t[v].ch; push(l), push(r);
 		t[v].path = t[l].path + t[v].self + t[r].path;
 		t[v].sub = t[v].vir + t[l].sub + t[v].self + t[r].sub;
 	}
-
 	void set(int u, int d, int v) {
 		t[u].ch[d] = v, t[v].p = u, pull(u);
 	}
-
 	void splay(int v) {
 		auto dir = [&](int x) {
 			int u = t[x].p;
