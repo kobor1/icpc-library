@@ -1,6 +1,8 @@
 /**
  * Author: kobor
  * Date: 2024-07-22
+ * License: CC0
+ * Source: own work
  * Description:
  * 	Persistent structures use a lot of memory in general,
  * 	so remember to optimise the code whenever possible.
